@@ -119,3 +119,4 @@ netlify deploy --prod --dir=dist
 - Оптимизация производительности
 - Поддержка React компонентов с `client:load`
 - SEO-friendly из коробки
+# site
