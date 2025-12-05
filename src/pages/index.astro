@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero';
+import Portfolio from '../components/Portfolio.astro';
+import Contacts from '../components/Contacts';
+import ScrollToTop from '../components/ScrollToTop';
+---
+
+<Layout title="Ivan Petrov — Sound Engineer / Sound Designer">
+  <Hero client:load />
+  <Portfolio />
+  <Contacts client:visible />
+  <ScrollToTop client:load />
+</Layout>
+
+<style>
+  /* Убедимся, что базовые стили применяются */
+  body {
+    min-height: 100vh;
+  }
+</style>

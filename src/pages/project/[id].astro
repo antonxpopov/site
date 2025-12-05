@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects.ts';
+import AudioPlayer from '../../components/AudioPlayer';
+import ImageGallery from '../../components/ImageGallery';
+import VimeoPlayer from '../../components/VimeoPlayer';
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { id: project.id.toString() },
+  }));
+}
+
+const { id } = Astro.params;
+const project = projects.find(p => p.id === parseInt(id));
+
+if (!project) {
+  return Astro.redirect('/');
+}
+---
+
+<Layout 
+  title={`${project.title} — Ivan Petrov`}
+  description={project.description}
+>
+  <div class="min-h-screen bg-bg py-20">
+    <div class="container mx-auto px-6 md:px-8 max-w-container">
+      <a href="/" class="inline-flex items-center justify-center w-10 h-10 mb-8 text-text hover:text-text-muted font-mono font-medium transition-all duration-300 hover:translate-x-[-4px] focus:outline-none focus:ring-2 focus:ring-text-muted rounded-full border border-border hover:border-text-muted" aria-label="Back to portfolio">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </a>
+      
+      <div class="bg-bg-secondary rounded-lg p-8 md:p-12 border border-border">
+        {project.year && (
+          <p class="text-sm text-text-muted mb-2 font-mono">
+            {project.year}
+          </p>
+        )}
+        <h1 class="text-2xl md:text-3xl font-medium text-text mb-4 font-mono">
+          {project.title}
+        </h1>
+        <p class="text-base text-text-muted mb-8 leading-relaxed font-mono">
+          {project.description}
+        </p>
+        
+        {project.vimeoId && (
+          <VimeoPlayer client:load videoId={project.vimeoId} title={project.title} />
+        )}
+        
+        {project.images && project.images.length > 0 && (
+          <ImageGallery client:load images={project.images} />
+        )}
+        
+        <div class="mb-8">
+          <AudioPlayer client:load src={project.audioUrl} title={project.title} />
+        </div>
+        
+        {project.fullDescription && (
+          <div class="prose max-w-none">
+            <p class="text-base text-text-muted leading-relaxed font-mono">
+              {project.fullDescription}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>
