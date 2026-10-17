@@ -2,28 +2,34 @@
  * Тесты для хука useIntersectionObserver
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 
 describe('useIntersectionObserver', () => {
+  const originalObserver = window.IntersectionObserver;
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
+  afterEach(() => {
+    window.IntersectionObserver = originalObserver;
+  });
+
   it('должен возвращать ref и isInView', () => {
     const { result } = renderHook(() => useIntersectionObserver());
-    
+
     expect(result.current[0]).toBeDefined();
     expect(typeof result.current[1]).toBe('boolean');
   });
 
   it('должен устанавливать isInView в true при отсутствии IntersectionObserver', () => {
-    // @ts-ignore
+    // @ts-expect-error -- simulate a browser without IntersectionObserver
     delete window.IntersectionObserver;
-    
+
     const { result } = renderHook(() => useIntersectionObserver());
-    
+
     expect(result.current[1]).toBe(true);
   });
 
@@ -35,9 +41,8 @@ describe('useIntersectionObserver', () => {
         triggerOnce: false,
       })
     );
-    
+
     expect(result.current[0]).toBeDefined();
     expect(result.current[1]).toBeDefined();
   });
 });
-

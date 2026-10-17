@@ -1,124 +1,58 @@
-# Портфолио звукорежиссёра на Astro.js
+# Портфолио звукорежиссёра (Astro)
 
-Минималистичный сайт-портфолио для звукорежиссёра и саунд-дизайнера, созданный на Astro.js.
+Минималистичный сайт-портфолио на **Astro 5**, **React** (острова), **TailwindCSS**, **Framer Motion**.
 
-## 🚀 Быстрый старт
-
-### Установка зависимостей
+## Быстрый старт
 
 ```bash
 npm install
-```
-
-### Запуск локального сервера разработки
-
-```bash
 npm run dev
 ```
 
-Откройте браузер и перейдите по адресу, который покажет Astro (обычно `http://localhost:4321`)
-
-### Сборка для продакшена
+Dev-сервер: обычно `http://localhost:4321`.
 
 ```bash
-npm run build
+npm run build      # статика в dist/
+npm run preview    # просмотр сборки
+npm run lint
+npm run type-check
+npm run test
 ```
 
-Собранные файлы будут в папке `dist/`
-
-### Предпросмотр продакшен-сборки
-
-```bash
-npm run preview
-```
-
-## 📁 Структура проекта
+## Структура
 
 ```
-├── src/
-│   ├── components/      # Компоненты (Astro + React)
-│   │   ├── Hero.astro
-│   │   ├── Portfolio.astro
-│   │   ├── About.astro
-│   │   ├── Contacts.astro
-│   │   └── *.jsx        # React компоненты для интерактивности
-│   ├── layouts/
-│   │   └── Layout.astro  # Базовый layout
-│   ├── pages/
-│   │   └── index.astro  # Главная страница
-│   └── data/
-│       └── projects.js  # Данные проектов
-├── public/
-│   └── audio/           # Аудио файлы
-├── astro.config.mjs     # Конфигурация Astro
-└── tailwind.config.mjs  # Конфигурация TailwindCSS
+src/
+├── components/     # Astro + React (.tsx)
+├── layouts/        # Layout.astro
+├── pages/          # index.astro, project/[id].astro
+├── data/projects.ts
+├── hooks/
+├── types/
+public/audio/       # MP3 для проектов
 ```
 
-## 🎨 Настройка
+## Контент
 
-### Изменение данных проектов
+- Проекты: `src/data/projects.ts`
+- Hero: `src/components/Hero.tsx`
+- Контакты: `src/components/Contacts.tsx`
+- О себе: `src/components/About.tsx` (пока не подключён в `index.astro`)
 
-Откройте файл `src/data/projects.js` и отредактируйте массив `projects`:
+Аудио кладите в `public/audio/` и указывайте путь в `projects.ts`.
 
-```javascript
-export const projects = [
-  {
-    id: 1,
-    title: "Название проекта",
-    description: "Описание проекта",
-    audioUrl: "/audio/your-file.mp3"
-  },
-  // ... добавьте свои проекты
-];
-```
+## AI-ассистенты (Cursor / Claude Code)
 
-### Добавление аудио файлов
+- **`AGENTS.md`** — общие правила и команды для агентов
+- **`CLAUDE.md`** — память Claude Code (импортирует `AGENTS.md`)
+- **`docs/CLAUDE_CODE.md`** — чеклист миграции на Claude Code
 
-1. Поместите ваши аудио файлы (формат MP3) в папку `public/audio/`
-2. Укажите путь в `projects.js`: `audioUrl: "/audio/your-file.mp3"`
+## Деплой
 
-### Изменение контактных данных
+Статическая сборка (`dist/`). CI: `.github/workflows/ci.yml`. Публикация на GitHub Pages: `.github/workflows/deploy.yml` (запускается при push в `main`).
 
-Откройте файл `src/components/ContactsList.jsx` и отредактируйте массив `contacts`.
+Vercel / Netlify: подключите репозиторий или деплойте каталог `dist` после `npm run build`.
 
-### Изменение информации "Обо мне"
+## Дополнительная документация
 
-Откройте файл `src/components/AboutContent.jsx` и отредактируйте текст.
-
-### Изменение имени и подписи
-
-Откройте файл `src/components/Hero.astro` и измените текст.
-
-## 🌐 Деплой
-
-### Vercel
-
-1. Установите Vercel CLI: `npm i -g vercel`
-2. В корне проекта выполните: `vercel`
-3. Следуйте инструкциям
-
-Или подключите репозиторий GitHub к Vercel через веб-интерфейс.
-
-### Netlify
-
-```bash
-npm run build
-netlify deploy --prod --dir=dist
-```
-
-## 🛠 Технологии
-
-- **Astro.js** — современный фреймворк для статических сайтов
-- **React** — для интерактивных компонентов
-- **TailwindCSS** — стилизация
-- **Framer Motion** — анимации при скролле
-
-## 📝 Особенности Astro
-
-- Статическая генерация по умолчанию
-- Оптимизация производительности
-- Поддержка React компонентов с `client:load`
-- SEO-friendly из коробки
-# site
-# site
-# site
+Архив заметок после код-ревью: `docs/archive/` (справочно, может быть устаревшим).

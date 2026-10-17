@@ -6,10 +6,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { ImageSliderOptions } from '../types';
 
-export function useImageSlider(
-  images: string[],
-  options: ImageSliderOptions = {}
-) {
+export function useImageSlider(images: string[], options: ImageSliderOptions = {}) {
   const { autoPlayInterval = 4000, pauseDuration = 10000 } = options;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -82,5 +79,3 @@ export function useImageSlider(
     goToPrevious,
   };
 }
-
-

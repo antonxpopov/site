@@ -6,6 +6,7 @@
 import { useState, useMemo } from 'react';
 import type { OptimizedImageProps } from '../types';
 import { generatePlaceholder, getOptimizedImageUrl } from '../utils/imageUtils';
+import { withBase } from '../utils/paths';
 
 export function OptimizedImage({
   src,
@@ -22,7 +23,8 @@ export function OptimizedImage({
   // Оптимизируем URL изображения
   const optimizedSrc = useMemo(() => {
     if (error) return generatePlaceholder(width, height);
-    return priority ? src : getOptimizedImageUrl(src, { width, quality: 85 });
+    const url = withBase(src);
+    return priority ? url : getOptimizedImageUrl(url, { width, quality: 85 });
   }, [src, error, priority, width, height]);
 
   const handleError = () => {
@@ -36,9 +38,7 @@ export function OptimizedImage({
 
   return (
     <div className="relative">
-      {isLoading && (
-        <div className="absolute inset-0 bg-bg-secondary animate-pulse" />
-      )}
+      {isLoading && <div className="absolute inset-0 bg-bg-secondary animate-pulse" />}
       <img
         src={optimizedSrc}
         alt={alt}
@@ -54,4 +54,3 @@ export function OptimizedImage({
     </div>
   );
 }
-

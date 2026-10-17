@@ -47,4 +47,17 @@ export interface OptimizedImageProps {
   height?: number;
 }
 
+export interface Performance {
+  date: string;
+  title: string;
+  city: string;
+  venue: string;
+  url?: string;
+}
 
+export interface WritingItem {
+  year: string;
+  title: string;
+  publication?: string;
+  url?: string;
+}

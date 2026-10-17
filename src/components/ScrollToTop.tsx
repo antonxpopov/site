@@ -1,24 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useThrottledScroll } from '../hooks/useThrottledScroll';
 import { SCROLL_THRESHOLDS } from '../constants/animations';
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > SCROLL_THRESHOLDS.SCROLL_TO_TOP) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  }, []);
+  useThrottledScroll(() => {
+    setIsVisible(window.scrollY > SCROLL_THRESHOLDS.SCROLL_TO_TOP);
+  }, 100);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -37,12 +26,7 @@ export default function ScrollToTop() {
       className="fixed bottom-8 right-8 z-40 w-12 h-12 flex items-center justify-center bg-bg-secondary border border-border hover:border-text-muted rounded-full text-text hover:text-accent transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-text-muted"
       aria-label="Scroll to top"
     >
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -53,5 +37,3 @@ export default function ScrollToTop() {
     </button>
   );
 }
-
-

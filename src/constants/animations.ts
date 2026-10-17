@@ -27,5 +27,3 @@ export const SCROLL_THRESHOLDS = {
   SCROLL_TO_TOP: 300, // Показывать кнопку "наверх" после 300px
   ACTIVE_SECTION_OFFSET: 100, // Смещение для определения активной секции
 } as const;
-
-

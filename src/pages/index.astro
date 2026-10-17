@@ -1,14 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero';
+import About from '../components/About';
 import Portfolio from '../components/Portfolio.astro';
+import Performances from '../components/Performances.astro';
+import Writing from '../components/Writing.astro';
 import Contacts from '../components/Contacts';
 import ScrollToTop from '../components/ScrollToTop';
 ---
 
-<Layout title="Ivan Petrov — Sound Engineer / Sound Designer">
+<Layout title="Anton Popov — Sound Engineer / Sound Designer">
   <Hero client:load />
+  <About client:visible />
   <Portfolio />
+  <Performances />
+  <Writing />
   <Contacts client:visible />
   <ScrollToTop client:load />
 </Layout>

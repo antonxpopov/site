@@ -40,12 +40,7 @@ export default function ImageGallery({ images = [] }: ImageGalleryProps) {
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
               aria-label="Previous image"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -59,12 +54,7 @@ export default function ImageGallery({ images = [] }: ImageGalleryProps) {
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
               aria-label="Next image"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -84,9 +74,7 @@ export default function ImageGallery({ images = [] }: ImageGalleryProps) {
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-text w-8'
-                    : 'bg-text-muted hover:bg-text'
+                  index === currentIndex ? 'bg-text w-8' : 'bg-text-muted hover:bg-text'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -97,4 +85,3 @@ export default function ImageGallery({ images = [] }: ImageGalleryProps) {
     </div>
   );
 }
-

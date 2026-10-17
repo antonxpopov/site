@@ -39,3 +39,11 @@ pnpm-debug.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Claude Code (local only)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Local editor / OS junk in project root
+*.rtf
+http-*

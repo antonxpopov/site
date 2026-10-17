@@ -5,18 +5,14 @@ import PortfolioCard from './PortfolioCard';
 
 <section id="artworks" class="min-h-[80vh] flex items-center bg-bg py-16">
   <div class="container mx-auto px-6 md:px-8 max-w-container w-full">
-    <h2 class="text-2xl md:text-3xl font-medium text-text mb-4 text-center font-mono">
-      Artworks
-    </h2>
-    
+    <h2 class="text-2xl md:text-3xl font-medium text-text mb-4 text-center font-mono">Artworks</h2>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-      {projects.map((project, index) => (
-        <PortfolioCard 
-          client:visible
-          project={project} 
-          index={index}
-        />
-      ))}
+      {
+        projects.map((project, index) => (
+          <PortfolioCard client:visible project={project} index={index} />
+        ))
+      }
     </div>
   </div>
 </section>

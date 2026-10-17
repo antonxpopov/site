@@ -22,7 +22,7 @@ export function getOptimizedImageUrl(
   } = {}
 ): string {
   const { width = 800 } = options;
-  
+
   // Если это внешний URL или уже оптимизирован, возвращаем как есть
   if (src.startsWith('http') || src.includes('?')) {
     return src;
@@ -32,7 +32,7 @@ export function getOptimizedImageUrl(
   // Например: return `${CDN_BASE_URL}${src}?w=${width}&q=${quality}&format=${format}`;
   // Используем width для будущей оптимизации
   void width; // Подавляем предупреждение о неиспользуемой переменной
-  
+
   return src;
 }
 
@@ -41,12 +41,13 @@ export function getOptimizedImageUrl(
  */
 export function isValidImageUrl(url: string): boolean {
   if (!url) return false;
-  
+
   const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
   const lowerUrl = url.toLowerCase();
-  
-  return imageExtensions.some(ext => lowerUrl.includes(ext)) || 
-         url.startsWith('data:image') ||
-         url.startsWith('http');
-}
 
+  return (
+    imageExtensions.some((ext) => lowerUrl.includes(ext)) ||
+    url.startsWith('data:image') ||
+    url.startsWith('http')
+  );
+}

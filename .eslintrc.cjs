@@ -5,6 +5,7 @@
 
 module.exports = {
   root: true,
+  ignorePatterns: ['dist/', '.astro/', 'node_modules/', 'coverage/', 'src/env.d.ts'],
   env: {
     browser: true,
     es2022: true,
@@ -63,8 +64,14 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         extraFileExtensions: ['.astro'],
       },
+      // Astro templates use HTML attributes (class, stroke-width) and need no keys in .map()
+      rules: {
+        'react/no-unknown-property': 'off',
+        'react/jsx-key': 'off',
+      },
     },
   ],
 };
+
 
 

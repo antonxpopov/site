@@ -49,4 +49,3 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
 
   return [ref, isInView];
 }
-

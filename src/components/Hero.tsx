@@ -26,22 +26,7 @@ export default function Hero() {
         >
           Soundartist from Far East
         </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="max-w-3xl mx-auto text-base md:text-lg text-text-muted leading-relaxed font-mono space-y-4"
-        >
-          <p>
-            Creates experimental electronic and electro-acoustic music. Develops interactive media installations. Explores methods of representation, description, production, reception and archiving of sound.
-          </p>
-          <p>
-            Uses sound as a tool for psychogeographical research. At the current stage in the frame of memory studies and hauntology of sound, reinterprets the auditory evidence of the past through the repeated use of media carriers.
-          </p>
-        </motion.div>
       </div>
     </motion.section>
   );
 }
-
-

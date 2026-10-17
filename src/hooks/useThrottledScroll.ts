@@ -3,45 +3,44 @@
  * Использует throttle для снижения нагрузки на производительность
  */
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-export function useThrottledScroll(
-  callback: () => void,
-  delay = 100
-): void {
-  const lastRun = useRef(Date.now());
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const throttledCallback = useCallback(() => {
-    const now = Date.now();
-    const timeSinceLastRun = now - lastRun.current;
-
-    if (timeSinceLastRun >= delay) {
-      callback();
-      lastRun.current = now;
-    } else {
-      // Очищаем предыдущий timeout, если он существует
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      // Планируем выполнение после оставшегося времени
-      timeoutRef.current = setTimeout(() => {
-        callback();
-        lastRun.current = Date.now();
-      }, delay - timeSinceLastRun);
-    }
-  }, [callback, delay]);
+export function useThrottledScroll(callback: () => void, delay = 100): void {
+  // Latest callback lives in a ref so inline callbacks don't re-subscribe the listener every render
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
 
   useEffect(() => {
-    window.addEventListener('scroll', throttledCallback, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', throttledCallback);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+    let lastRun = 0;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const run = () => {
+      lastRun = Date.now();
+      callbackRef.current();
+    };
+
+    const handleScroll = () => {
+      const timeSinceLastRun = Date.now() - lastRun;
+
+      if (timeSinceLastRun >= delay) {
+        run();
+      } else {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(run, delay - timeSinceLastRun);
       }
     };
-  }, [throttledCallback]);
+
+    // Sync with the initial scroll position (e.g. reload mid-page or opening /#section)
+    run();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [delay]);
 }
-
-

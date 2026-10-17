@@ -4,26 +4,21 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { OptimizedImage } from './OptimizedImage';
 import type { Project } from '../types';
 import { ANIMATION_DELAYS } from '../constants/animations';
+import { withBase } from '../utils/paths';
 
 interface PortfolioCardProps {
   project: Project;
   index: number;
 }
 
-const PortfolioCard = memo(function PortfolioCard({
-  project,
-  index,
-}: PortfolioCardProps) {
+const PortfolioCard = memo(function PortfolioCard({ project, index }: PortfolioCardProps) {
   const [ref, isInView] = useIntersectionObserver<HTMLAnchorElement>({
     threshold: 0.1,
     rootMargin: '50px',
     triggerOnce: true,
   });
 
-  const imageUrl = useMemo(
-    () => project.imageUrl || '/images/placeholder.jpg',
-    [project.imageUrl]
-  );
+  const imageUrl = useMemo(() => project.imageUrl || '/images/placeholder.jpg', [project.imageUrl]);
 
   const transition = useMemo(
     () => ({
@@ -36,7 +31,7 @@ const PortfolioCard = memo(function PortfolioCard({
   return (
     <motion.a
       ref={ref}
-      href={`/project/${project.id}`}
+      href={withBase(`/project/${project.id}`)}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={transition}
@@ -70,4 +65,3 @@ const PortfolioCard = memo(function PortfolioCard({
 PortfolioCard.displayName = 'PortfolioCard';
 
 export default PortfolioCard;
-

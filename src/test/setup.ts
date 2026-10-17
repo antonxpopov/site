@@ -20,7 +20,7 @@ global.IntersectionObserver = class IntersectionObserver {
     return [];
   }
   unobserve() {}
-} as any;
+} as unknown as typeof IntersectionObserver;
 
 // Моки для window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -36,5 +36,3 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: () => {},
   }),
 });
-
-

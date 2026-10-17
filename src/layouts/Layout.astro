@@ -1,11 +1,20 @@
 ---
 import HamburgerMenu from '../components/HamburgerMenu';
+import { withBase } from '../utils/paths';
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Portfolio of sound engineer and sound designer Ivan Petrov. Professional audio work for film, advertising, and media." } = Astro.props;
+const {
+  title,
+  description = 'Portfolio of sound engineer and sound designer Anton Popov. Professional audio work for film, advertising, and media.',
+} = Astro.props;
+
+// Pages build to directories, and GitHub Pages redirects `/site` → `/site/`
+const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonicalUrl = new URL(pathname, Astro.site).href;
+const ogImage = new URL(withBase('/images/anton-popov.jpg'), Astro.site).href;
 ---
 
 <!doctype html>
@@ -14,19 +23,35 @@ const { title, description = "Portfolio of sound engineer and sound designer Iva
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="sound engineer, sound designer, audio, portfolio, sound design" />
+    <meta
+      name="keywords"
+      content="sound engineer, sound designer, audio, portfolio, sound design"
+    />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+      /></noscript
+    >
     <title>{title}</title>
   </head>
   <body>
@@ -103,4 +128,3 @@ const { title, description = "Portfolio of sound engineer and sound designer Iva
     opacity: 0.8;
   }
 </style>
-
