@@ -1,0 +1,127 @@
+---
+import type { Lang, Project } from '../types';
+import PhotoSlider from './PhotoSlider.astro';
+import { withBase } from '../utils/paths';
+import { localePath, ui } from '../i18n/ui';
+import CalameoEmbed from './CalameoEmbed.astro';
+import AudioWave from './AudioWave.astro';
+import { publicFileExists } from '../utils/audio';
+
+interface Props {
+  project: Project;
+  backHref: string;
+  backLabel: string;
+  lang: Lang;
+}
+const { project, backHref, backLabel, lang } = Astro.props;
+const t = ui[lang];
+
+const hasAudio = project.audioUrl ? publicFileExists(project.audioUrl) : false;
+
+const vimeo = project.vimeoId
+  ? (String(project.vimeoId).match(/(\d{6,})/)?.[1] ?? String(project.vimeoId))
+  : undefined;
+
+const videoSrc = vimeo
+  ? `https://player.vimeo.com/video/${vimeo}?title=0&byline=0&portrait=0`
+  : project.youtubeId
+    ? `https://www.youtube-nocookie.com/embed/${project.youtubeId}?rel=0`
+    : undefined;
+---
+
+<main class="min-h-screen bg-bg pt-12 pb-24 font-mono">
+  <div class="container mx-auto px-6 md:px-8 max-w-container">
+    <a href={withBase(localePath(lang, backHref))} class="text-sm text-text-muted hover:text-text"
+      >← {backLabel}</a
+    >
+
+    <!-- 1 year · 2 title · 3 technical description -->
+    <header class="mt-8 mb-10 max-w-3xl">
+      {project.year && <p class="text-sm text-text-muted mb-2">{project.year}</p>}
+      <h1 class="text-2xl md:text-3xl font-semibold text-text mb-4">{project.title}</h1>
+      {
+        (project.format ||
+          project.media ||
+          project.credits ||
+          project.venue ||
+          project.curators) && (
+          <ul class="text-sm text-text-muted space-y-1">
+            {project.credits && <li class="font-semibold text-text">{project.credits}</li>}
+            {project.format && <li>{project.format}</li>}
+            {project.media && <li>{project.media}</li>}
+            {project.venue && <li>{project.venue}</li>}
+            {project.curators && (
+              <li>
+                {t.curators}: {project.curators}
+              </li>
+            )}
+          </ul>
+        )
+      }
+    </header>
+
+    <!-- 4 conceptual description -->
+    {
+      project.paragraphs && project.paragraphs.length > 0 && (
+        <div class="max-w-[65ch] space-y-4 text-text-muted leading-[1.7] mb-10">
+          {project.paragraphs.map((text) => (
+            <p>{text}</p>
+          ))}
+        </div>
+      )
+    }
+
+    <!-- 5 photos (slider) -->
+    {
+      project.calameoId ? (
+        <CalameoEmbed id={project.calameoId} title={project.title} lang={lang} />
+      ) : (
+        project.images &&
+        project.images.length > 0 && (
+          <PhotoSlider
+            images={project.images}
+            alt={project.title}
+            lang={lang}
+            credit={project.photoCredit}
+          />
+        )
+      )
+    }
+    {hasAudio && <AudioWave src={project.audioUrl!} title={project.title} lang={lang} />}
+
+    <!-- 6 video -->
+    {
+      videoSrc && (
+        <div class="relative w-full aspect-video bg-bg-secondary rounded-lg overflow-hidden mb-10">
+          <iframe
+            src={videoSrc}
+            class="absolute inset-0 w-full h-full"
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+            allowfullscreen
+            loading="lazy"
+            title={project.title}
+          />
+        </div>
+      )
+    }
+
+    {
+      project.links && project.links.length > 0 && (
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {project.links.map((link) => (
+            <li>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-text underline underline-offset-4 hover:text-text-muted"
+              >
+                {link.label} ↗
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</main>

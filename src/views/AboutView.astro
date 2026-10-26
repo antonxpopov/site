@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { bio, cv } from '../data/cv';
+import { ui, localePath } from '../i18n/ui';
+import { withBase } from '../utils/paths';
+import type { Lang } from '../types';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const paragraphs = bio[lang];
+const cvFile = lang === 'ru' ? '/cv/popov_cv_ru.pdf' : '/cv/popov_cv_en.pdf';
+---
+
+<Layout title={t.titles.about} description={paragraphs[1]} lang={lang}>
+  <main class="min-h-screen bg-bg pt-12 pb-24 font-mono">
+    <div class="container mx-auto px-6 md:px-8 max-w-container">
+      <h1 class="text-2xl md:text-3xl font-semibold text-text mb-8">{t.nav.about}</h1>
+
+      <div class="max-w-[65ch] space-y-4 text-text-muted leading-[1.7]">
+        {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
+      </div>
+
+      <p class="mt-6 text-sm">
+        <a
+          href={withBase(cvFile)}
+          class="text-text underline underline-offset-4 hover:text-text-muted"
+          download
+        >
+          {t.downloadCv} ↓
+        </a>
+      </p>
+
+      <h2 class="text-xl font-semibold text-text mt-16 mb-2">{t.cvHeading}</h2>
+      {
+        cv.map((section) => (
+          <section class="mt-10">
+            <h3 class="text-sm uppercase tracking-wider text-text-muted mb-3">
+              {lang === 'ru' ? section.ruTitle : section.title}
+            </h3>
+            <ul class="divide-y divide-border border-t border-b border-border">
+              {section.items.map((item) => (
+                <li class="py-2 grid grid-cols-[3rem_1fr] md:grid-cols-[5rem_1fr] gap-x-4 text-sm">
+                  <span class="text-text-muted">{item.year}</span>
+                  {item.href ? (
+                    <a
+                      href={withBase(localePath(lang, item.href))}
+                      class="text-text underline underline-offset-4 hover:text-text-muted"
+                    >
+                      {lang === 'ru' ? item.ru : item.text}
+                    </a>
+                  ) : (
+                    <span class="text-text">{lang === 'ru' ? item.ru : item.text}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</Layout>

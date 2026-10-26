@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { getAsset } from '../utils/images';
+
+export interface Entry {
+  year: string;
+  title: string;
+  meta?: string;
+  href?: string;
+  thumb?: string;
+  external?: boolean;
+}
+
+interface Props {
+  entries: Entry[];
+}
+const { entries } = Astro.props;
+---
+
+<ul class="divide-y divide-border font-mono">
+  {
+    entries.map((e) => (
+      <li>
+        {(() => {
+          const inner = (
+            <>
+              <span class="text-text-muted text-sm pt-1">{e.year}</span>
+              <span class="block w-[4.5rem] md:w-24 aspect-[3/2] rounded overflow-hidden border border-border">
+                {e.thumb && getAsset(e.thumb) && (
+                  <Image
+                    src={getAsset(e.thumb)!}
+                    alt=""
+                    width={192}
+                    height={128}
+                    format="webp"
+                    quality={70}
+                    loading="lazy"
+                    class="w-full h-full object-cover"
+                  />
+                )}
+              </span>
+              <span>
+                <span class="block text-text">{e.title}</span>
+                {e.meta && <span class="block text-text-muted text-sm">{e.meta}</span>}
+              </span>
+            </>
+          );
+          const cls =
+            'py-4 grid grid-cols-[3rem_4.5rem_1fr] md:grid-cols-[5rem_6rem_1fr] gap-x-4 items-start';
+          return e.href ? (
+            <a href={e.href} class={`${cls} hover:bg-bg-secondary/60 transition-colors`}>
+              {inner}
+            </a>
+          ) : (
+            <div class={cls}>{inner}</div>
+          );
+        })()}
+      </li>
+    ))
+  }
+</ul>

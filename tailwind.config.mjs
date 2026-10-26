@@ -1,24 +1,25 @@
 /** @type {import('tailwindcss').Config} */
+const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
+
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
       fontFamily: {
-        'mono': ['Source Code Pro', 'Monaco', 'Menlo', 'Courier New', 'monospace'],
+        mono: ['Source Code Pro', 'Monaco', 'Menlo', 'Courier New', 'monospace'],
       },
       colors: {
-        'bg': '#000000',
-        'bg-secondary': '#1a1a1a',
-        'text': '#f5f5f5',
-        'text-muted': '#a0a0a0',
-        'border': '#333333',
-        'accent': '#f5f5f5',
+        bg: token('bg'),
+        'bg-secondary': token('bg-secondary'),
+        text: token('text'),
+        'text-muted': token('text-muted'),
+        border: token('border'),
+        accent: token('text'),
       },
       maxWidth: {
-        'container': '1000px',
+        container: '1000px',
       },
     },
   },
   plugins: [],
-}
-
+};

@@ -69,4 +69,4 @@ Prefer this file and `README.md` for current workflow.
 
 ## Deploy
 
-Static output in `dist/`. CI: `.github/workflows/ci.yml` (lint, type-check, format, test, build). Deploy: `.github/workflows/deploy.yml` publishes `dist/` to GitHub Pages on push to `main`. `astro.config.mjs` targets the project page `https://snwglb.github.io/site/` (`base: '/site'`); with a custom domain, set `site` to it and drop `base`. Build every internal link/asset path with `withBase()` from `src/utils/paths.ts` — never hardcode `/...`. Deploy runs the same lint/type/format/test gates as CI.
+Static output in `dist/`. CI: `.github/workflows/ci.yml` (lint, type-check, format, test, build). Deploy: `.github/workflows/deploy.yml` publishes `dist/` to GitHub Pages on push to `main`. `astro.config.mjs` targets the project page `https://antonxpopov.github.io/site/` (`base: '/site'`); with a custom domain, set `site` to it and drop `base`. Build every internal link/asset path with `withBase()` from `src/utils/paths.ts` — never hardcode `/...`. Deploy runs the same lint/type/format/test gates as CI.

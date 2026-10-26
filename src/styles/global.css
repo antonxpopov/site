@@ -1,0 +1,59 @@
+/* Design tokens — single source of truth (Tailwind reads these via tailwind.config.mjs).
+   Values are space-separated RGB channels so Tailwind opacity modifiers (bg-bg/90) work. */
+:root {
+  --color-bg: 0 0 0;
+  --color-bg-secondary: 26 26 26;
+  --color-text: 245 245 245;
+  --color-text-muted: 200 200 200;
+  --color-border: 68 68 68;
+  --color-focus: 245 245 245;
+}
+
+html {
+  background-color: rgb(var(--color-bg));
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Courier New', monospace;
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
+  line-height: 1.7;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Keyboard focus: visible, consistent, never shown for mouse clicks */
+:focus-visible {
+  outline: 1px solid rgb(var(--color-focus));
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Smooth scrolling only for people who have not asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide the default disclosure triangle in <summary> (Safari) */
+summary::-webkit-details-marker {
+  display: none;
+}

@@ -1,0 +1,60 @@
+---
+import { ui } from '../i18n/ui';
+import type { Lang } from '../types';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<button
+  type="button"
+  data-scroll-top
+  aria-label={ui[lang].toTop}
+  class="md:hidden fixed bottom-6 right-6 z-40 w-11 h-11 flex items-center justify-center rounded-full border border-border bg-bg/90 backdrop-blur text-text opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <svg
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path d="M12 19V5M5 12l7-7 7 7"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-scroll-top]');
+  if (button) {
+    let ticking = false;
+    const update = () => {
+      // Show after one screen of scrolling
+      const visible = window.scrollY > window.innerHeight;
+      button.classList.toggle('opacity-0', !visible);
+      button.classList.toggle('pointer-events-none', !visible);
+      button.tabIndex = visible ? 0 : -1;
+      ticking = false;
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+    update();
+
+    button.addEventListener('click', () => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+</script>

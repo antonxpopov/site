@@ -1,27 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Portfolio from '../components/Portfolio.astro';
-import Performances from '../components/Performances.astro';
-import Writing from '../components/Writing.astro';
-import Contacts from '../components/Contacts';
-import ScrollToTop from '../components/ScrollToTop';
+import HomeView from '../views/HomeView.astro';
 ---
 
-<Layout title="Anton Popov — Sound Engineer / Sound Designer">
-  <Hero client:load />
-  <About client:visible />
-  <Portfolio />
-  <Performances />
-  <Writing />
-  <Contacts client:visible />
-  <ScrollToTop client:load />
-</Layout>
-
-<style>
-  /* Убедимся, что базовые стили применяются */
-  body {
-    min-height: 100vh;
-  }
-</style>
+<HomeView lang="en" />

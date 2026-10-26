@@ -1,0 +1,121 @@
+---
+import type { Lang } from '../types';
+import { ui } from '../i18n/ui';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  src: string;
+  title: string;
+  lang: Lang;
+}
+const { src, title, lang } = Astro.props;
+const t = ui[lang].audio;
+---
+
+<section
+  class="mb-10 max-w-3xl"
+  aria-label={t.label}
+  data-audio
+  data-src={encodeURI(withBase(src))}
+>
+  <div class="flex items-center gap-4 border border-border rounded-lg p-3 md:p-4">
+    <button
+      type="button"
+      data-play
+      disabled
+      aria-label={t.play}
+      data-label-play={t.play}
+      data-label-pause={t.pause}
+      class="shrink-0 w-10 h-10 rounded-full border border-border text-text flex items-center justify-center hover:bg-bg-secondary disabled:opacity-40 transition-colors"
+    >
+      <svg data-icon-play class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+        ><path d="M8 5v14l11-7z"></path></svg
+      >
+      <svg
+        data-icon-pause
+        class="w-4 h-4 hidden"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg
+      >
+    </button>
+    <div class="min-w-0 flex-1">
+      <div data-wave class="w-full h-16" role="img" aria-label={`${t.label}: ${title}`}></div>
+      <p class="mt-1 text-xs text-text-muted flex justify-between">
+        <span data-time>0:00</span>
+        <span data-status>{t.loading}</span>
+        <span data-duration>–:––</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
+  document.querySelectorAll<HTMLElement>('[data-audio]').forEach((root) => {
+    const wave = root.querySelector<HTMLElement>('[data-wave]')!;
+    const btn = root.querySelector<HTMLButtonElement>('[data-play]')!;
+    const time = root.querySelector<HTMLElement>('[data-time]')!;
+    const dur = root.querySelector<HTMLElement>('[data-duration]')!;
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const iPlay = root.querySelector('[data-icon-play]')!;
+    const iPause = root.querySelector('[data-icon-pause]')!;
+    let started = false;
+
+    // Load the library and decode the audio only once the player is near the viewport.
+    const init = async () => {
+      if (started) return;
+      started = true;
+      const { default: WaveSurfer } = await import('wavesurfer.js');
+      const css = (v: string) =>
+        `rgb(${getComputedStyle(document.documentElement).getPropertyValue(v).trim().replace(/ /g, ',')})`;
+      const ws = WaveSurfer.create({
+        container: wave,
+        url: root.dataset.src!,
+        height: 64,
+        barWidth: 2,
+        barGap: 2,
+        barRadius: 1,
+        cursorWidth: 0,
+        waveColor: css('--color-border'),
+        progressColor: css('--color-text'),
+        normalize: true,
+      });
+      ws.on('ready', () => {
+        btn.disabled = false;
+        status.textContent = '';
+        dur.textContent = fmt(ws.getDuration());
+      });
+      ws.on('error', () => {
+        status.textContent = '×';
+      });
+      ws.on('timeupdate', (t) => {
+        time.textContent = fmt(t);
+      });
+      const sync = () => {
+        const playing = ws.isPlaying();
+        iPlay.classList.toggle('hidden', playing);
+        iPause.classList.toggle('hidden', !playing);
+        btn.setAttribute('aria-label', playing ? btn.dataset.labelPause! : btn.dataset.labelPlay!);
+      };
+      ws.on('play', sync);
+      ws.on('pause', sync);
+      ws.on('finish', sync);
+      btn.addEventListener('click', () => ws.playPause());
+    };
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (es) => {
+          if (es.some((e) => e.isIntersecting)) {
+            io.disconnect();
+            init();
+          }
+        },
+        { rootMargin: '300px' }
+      );
+      io.observe(root);
+    } else init();
+  });
+</script>

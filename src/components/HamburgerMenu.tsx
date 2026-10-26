@@ -8,7 +8,8 @@ const NAV_LINKS: NavLink[] = [
   { label: 'Home', to: '#home' },
   { label: 'About me', to: '#about' },
   { label: 'Artworks', to: '#artworks' },
-  { label: 'Performances', to: '#performances' },
+  { label: 'Workshops', to: '#performances' },
+  { label: 'Lectures', to: '#lectures' },
   { label: 'Writing', to: '#writing' },
   { label: 'Contacts', to: '#contacts' },
 ];

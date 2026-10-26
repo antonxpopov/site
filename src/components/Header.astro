@@ -1,0 +1,119 @@
+---
+import { withBase } from '../utils/paths';
+import { ui, localePath } from '../i18n/ui';
+import type { Lang } from '../types';
+
+interface Props {
+  overlay?: boolean;
+  lang: Lang;
+  /** Current path without base and language prefix */
+  neutralPath: string;
+  /** Same page in each language (already with base) */
+  alt: Record<Lang, string>;
+}
+const { overlay = false, lang, neutralPath, alt } = Astro.props;
+const t = ui[lang];
+
+const links = [
+  { label: t.nav.about, href: '/about' },
+  { label: t.nav.projects, href: '/projects' },
+  { label: t.nav.teaching, href: '/teaching' },
+  { label: t.nav.performances, href: '/performances' },
+  { label: t.nav.contacts, href: '/contacts' },
+];
+
+const isActive = (href: string) => neutralPath === href || neutralPath.startsWith(`${href}/`);
+const langs: { code: Lang; label: string }[] = [
+  { code: 'en', label: 'EN' },
+  { code: 'ru', label: 'RU' },
+];
+---
+
+<header
+  class:list={[
+    'top-0 inset-x-0 z-50 font-mono',
+    overlay ? 'absolute' : 'sticky bg-bg/90 backdrop-blur border-b border-border',
+  ]}
+>
+  <div
+    class="container mx-auto px-6 md:px-8 max-w-container h-16 flex items-center justify-between gap-6"
+  >
+    <!-- Language switch -->
+    <div class="flex items-center gap-1 text-sm" role="group" aria-label={t.switchLabel}>
+      {
+        langs.map((l, i) => (
+          <>
+            {i > 0 && (
+              <span class="text-border" aria-hidden="true">
+                /
+              </span>
+            )}
+            <a
+              href={alt[l.code]}
+              hreflang={l.code}
+              lang={l.code}
+              class:list={[
+                l.code === lang ? 'text-text font-semibold' : 'text-text-muted hover:text-text',
+              ]}
+              aria-current={l.code === lang ? 'true' : undefined}
+            >
+              {l.label}
+            </a>
+          </>
+        ))
+      }
+    </div>
+
+    <nav class="hidden md:flex gap-6 text-sm" aria-label={t.mainNav}>
+      {
+        links.map((l) => (
+          <a
+            href={withBase(localePath(lang, l.href))}
+            class:list={[
+              'hover:text-text',
+              isActive(l.href) ? 'text-text underline underline-offset-8' : 'text-text-muted',
+            ]}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <details class="group md:hidden relative">
+      <summary
+        class="list-none [&::-webkit-details-marker]:hidden cursor-pointer text-text p-2 -m-2"
+        aria-label={t.menu}
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path class="group-open:hidden" d="M4 7h16M4 12h16M4 17h16"></path>
+          <path class="hidden group-open:block" d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </summary>
+      <nav
+        class="absolute right-0 top-8 w-52 bg-bg border border-border rounded-lg p-4 flex flex-col gap-3 text-sm"
+        aria-label={t.mainNav}
+      >
+        {
+          links.map((l) => (
+            <a
+              href={withBase(localePath(lang, l.href))}
+              class={isActive(l.href) ? 'text-text' : 'text-text-muted'}
+            >
+              {l.label}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
+  </div>
+</header>

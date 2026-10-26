@@ -47,3 +47,6 @@ CLAUDE.local.md
 # Local editor / OS junk in project root
 *.rtf
 http-*
+
+# Raw source material (originals, contacts) — local only
+content/

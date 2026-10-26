@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 
-// GitHub Pages project page: https://snwglb.github.io/site/
+// GitHub Pages project page: https://antonxpopov.github.io/site/
 // With a custom domain, set `site` to it and remove `base`.
 export default defineConfig({
-  site: 'https://snwglb.github.io',
+  site: 'https://antonxpopov.github.io',
   base: '/site',
   trailingSlash: 'ignore',
   integrations: [

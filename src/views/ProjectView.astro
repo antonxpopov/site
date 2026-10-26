@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectDetail from '../components/ProjectDetail.astro';
+import { ui } from '../i18n/ui';
+import { localizeProject } from '../i18n/localize';
+import type { Lang, Project } from '../types';
+
+interface Props {
+  lang: Lang;
+  project: Project;
+  section: 'projects' | 'performances';
+}
+const { lang, project, section } = Astro.props;
+const t = ui[lang];
+const text = localizeProject(project, lang);
+const suffix = lang === 'ru' ? 'Антон Попов' : 'Anton Popov';
+---
+
+<Layout title={`${text.title} — ${suffix}`} description={text.description} lang={lang}>
+  <ProjectDetail project={text} backHref={`/${section}`} backLabel={t.back[section]} lang={lang} />
+</Layout>

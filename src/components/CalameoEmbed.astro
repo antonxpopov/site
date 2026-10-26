@@ -1,0 +1,49 @@
+---
+import type { Lang } from '../types';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  id: string;
+  title: string;
+  lang: Lang;
+}
+const { id, title, lang } = Astro.props;
+const t = ui[lang].calameo;
+const src = `https://v.calameo.com/?bkcode=${id}&mode=mini&view=slide&showsharemenu=0`;
+---
+
+<section class="mb-10" aria-label={t.label}>
+  <div
+    class="relative w-full aspect-[3/2] bg-bg-secondary rounded-lg overflow-hidden border border-border"
+    data-calameo
+    data-src={src}
+    data-title={title}
+  >
+    <button
+      type="button"
+      data-load
+      class="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-2 text-text hover:bg-black/30 transition-colors"
+    >
+      <span class="text-lg">{t.open}</span>
+      <span class="text-sm text-text-muted">{t.hint}</span>
+    </button>
+  </div>
+  <noscript>
+    <a href={`https://www.calameo.com/books/${id}`} class="underline underline-offset-4"
+      >{t.open} ↗</a
+    >
+  </noscript>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-calameo]').forEach((box) => {
+    box.querySelector('[data-load]')?.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = box.dataset.src!;
+      f.title = box.dataset.title ?? '';
+      f.allowFullscreen = true;
+      f.className = 'absolute inset-0 w-full h-full';
+      box.replaceChildren(f);
+    });
+  });
+</script>
