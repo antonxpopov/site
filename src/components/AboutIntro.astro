@@ -18,7 +18,7 @@ const cvUrl =
     : 'https://drive.google.com/file/d/1h_vU0aFkpLtUzlAlI11S0bHoopUXG-Ec/view?usp=sharing';
 ---
 
-<div class="grid gap-10 md:grid-cols-[minmax(0,65ch)_1fr] md:items-start">
+<div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
   <div>
     <div class="max-w-[65ch] space-y-4 text-body text-text-muted">
       {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
@@ -42,10 +42,10 @@ const cvUrl =
         alt={t.name}
         formats={['avif', 'webp']}
         widths={[480, 800, 1200]}
-        sizes="(min-width: 768px) 480px, 100vw"
+        sizes="(min-width: 1024px) 288px, (min-width: 640px) 384px, 100vw"
         loading="lazy"
         decoding="async"
-        class="w-full h-auto rounded-lg grayscale"
+        class="w-full max-w-sm lg:max-w-none h-auto rounded-lg grayscale"
       />
     )
   }

@@ -117,3 +117,19 @@ const langs: { code: Lang; label: string }[] = [
     </details>
   </div>
 </header>
+
+<script>
+  // Close the mobile <details> menu on outside click or Esc.
+  const menu = document.querySelector<HTMLDetailsElement>('header details');
+  if (menu) {
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>

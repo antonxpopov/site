@@ -35,7 +35,7 @@ export const ui = {
       home: 'Anton Popov — Sound and technological artist',
       projects: 'Projects — Anton Popov',
       performances: 'Performances — Anton Popov',
-      teaching: 'Teaching — Anton Popov',
+      teaching: 'Workshops — Anton Popov',
       about: 'About — Anton Popov',
       contacts: 'Contacts — Anton Popov',
     },
