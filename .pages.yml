@@ -1,0 +1,179 @@
+# Pages CMS (https://pagescms.org) — content editor for new projects.
+# Built-in projects stay in src/data/projects.ts; here they can only be hidden.
+media:
+  - name: images
+    label: Фото проектов
+    input: src/assets/images/projects
+    output: /images/projects
+    extensions: [jpg, jpeg, png, webp]
+  - name: audio
+    label: Аудио
+    input: public/audio
+    output: /audio
+    extensions: [mp3]
+
+content:
+  - name: projects
+    label: Новые проекты
+    type: collection
+    path: src/cms/projects
+    format: json
+    filename: '{fields.slug}.json'
+    view:
+      fields: [title, year, category, hidden]
+      primary: title
+      sort: [year]
+    fields:
+      - name: hidden
+        label: Скрыть с сайта
+        description: Проект сохраняется, но не показывается на сайте.
+        type: boolean
+        default: false
+      - name: slug
+        label: Адрес страницы (латиница)
+        description: 'Только a–z, 0–9 и дефис, например new-installation. Станет ссылкой /projects/new-installation. После публикации не менять.'
+        type: string
+        required: true
+        pattern:
+          regex: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          message: 'Только строчные латинские буквы, цифры и дефис'
+      - name: category
+        label: Раздел
+        type: select
+        default: artwork
+        options:
+          values:
+            - value: artwork
+              label: Проекты
+            - value: performance
+              label: Перформансы
+      - name: year
+        label: Год
+        type: string
+        required: true
+        pattern:
+          regex: '^\d{4}$'
+          message: 'Четыре цифры, например 2026'
+      - name: title
+        label: Название (EN)
+        type: string
+        required: true
+      - name: en
+        label: Текст — English
+        type: object
+        fields:
+          - name: description
+            label: Краткое описание (одна строка)
+            type: string
+          - name: format
+            label: Формат
+            description: 'Например: Interactive sound installation'
+            type: string
+          - name: media
+            label: Материалы
+            type: string
+          - name: credits
+            label: Соавторы
+            type: string
+          - name: venue
+            label: Место показа
+            type: string
+          - name: curators
+            label: Кураторы
+            type: string
+          - name: photoCredit
+            label: Фото (автор)
+            type: string
+          - name: text
+            label: Основной текст
+            description: Абзацы разделяй пустой строкой.
+            type: text
+      - name: ru
+        label: Текст — русский
+        type: object
+        fields:
+          - name: title
+            label: Название (RU)
+            description: Если пусто — русская версия покажет английский текст.
+            type: string
+          - name: description
+            label: Краткое описание (одна строка)
+            type: string
+          - name: format
+            label: Формат
+            description: 'Например: Interactive sound installation'
+            type: string
+          - name: media
+            label: Материалы
+            type: string
+          - name: credits
+            label: Соавторы
+            type: string
+          - name: venue
+            label: Место показа
+            type: string
+          - name: curators
+            label: Кураторы
+            type: string
+          - name: photoCredit
+            label: Фото (автор)
+            type: string
+          - name: text
+            label: Основной текст
+            description: Абзацы разделяй пустой строкой.
+            type: text
+      - name: images
+        label: Фото
+        description: 'Первое фото — обложка. Имена файлов: popov_<адрес>_<год>_01.jpg'
+        type: image
+        options:
+          media: images
+          multiple: true
+      - name: vimeoId
+        label: Vimeo ID
+        description: 'Число из ссылки vimeo.com/1095200572'
+        type: string
+      - name: youtubeId
+        label: YouTube ID
+        description: 'Только если нет Vimeo. Код из ссылки youtube.com/watch?v=КОД'
+        type: string
+      - name: audioUrl
+        label: Аудио (mp3)
+        type: file
+        options:
+          media: audio
+      - name: links
+        label: Ссылки
+        type: object
+        list: true
+        fields:
+          - name: url
+            label: URL
+            type: string
+          - name: label
+            label: Подпись (EN)
+            type: string
+          - name: label_ru
+            label: Подпись (RU)
+            type: string
+
+  - name: visibility
+    label: Видимость проектов
+    type: file
+    path: src/cms/visibility.json
+    format: json
+    fields:
+      - name: hidden
+        label: Скрыть с сайта
+        type: object
+        fields:
+          - { name: retrospection-of-sound, label: 'Re:trospection of Sound', type: boolean }
+          - { name: re-infinity, label: 'RE∞', type: boolean }
+          - { name: auricle, label: 'Auricle', type: boolean }
+          - { name: source, label: 'Source', type: boolean }
+          - { name: rainforest-iv, label: 'Rainforest IV', type: boolean }
+          - { name: soundscape-console, label: 'Soundscape Console', type: boolean }
+          - { name: gostinka, label: 'Gostinka — 46 Nekrasovskaya St.', type: boolean }
+          - { name: strelka, label: 'Strelka', type: boolean }
+          - { name: autodeconstruction, label: 'Autodeconstruction (перформанс)', type: boolean }
+          - { name: safety-zone, label: 'Safety Zone (перформанс)', type: boolean }

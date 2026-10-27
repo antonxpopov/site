@@ -1,10 +1,11 @@
 import type { Lang, Project, Performance, Lecture } from '../types';
 import { projectsRu } from '../data/projects.ru';
+import { cmsProjectsRu } from '../data/cmsProjects';
 
 /** Returns the project with text fields in the requested language (EN fallback). */
 export function localizeProject(project: Project, lang: Lang): Project {
   if (lang === 'en') return project;
-  const ru = projectsRu[project.slug];
+  const ru = projectsRu[project.slug] ?? cmsProjectsRu[project.slug];
   if (!ru) return project;
   return {
     ...project,

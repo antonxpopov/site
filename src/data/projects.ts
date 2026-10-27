@@ -1,8 +1,9 @@
 import type { Project } from '../types';
+import { cmsProjects, hiddenSlugs } from './cmsProjects';
 
 const IMG = '/images/projects';
 
-export const projects: Project[] = [
+const builtInProjects: Project[] = [
   {
     slug: 'retrospection-of-sound',
     title: 'Re:trospection of Sound',
@@ -204,6 +205,11 @@ export const projects: Project[] = [
       { label: 'Vimeo — alternative cut', url: 'https://vimeo.com/1079712189' },
     ],
   },
+];
+
+export const projects: Project[] = [
+  ...builtInProjects.filter((p) => !hiddenSlugs.has(p.slug)),
+  ...cmsProjects,
 ];
 
 export const artworks = projects.filter((p) => p.category !== 'performance');

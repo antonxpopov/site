@@ -59,6 +59,36 @@ export interface Project {
   links?: ProjectLink[];
 }
 
+/** Text fields of a project added through Pages CMS (see .pages.yml) */
+export interface CmsProjectText {
+  title?: string;
+  description?: string;
+  format?: string;
+  media?: string;
+  credits?: string;
+  venue?: string;
+  curators?: string;
+  photoCredit?: string;
+  /** Free text; paragraphs separated by a blank line */
+  text?: string;
+}
+
+/** One JSON file in src/content/projects, as written by Pages CMS */
+export interface CmsProject {
+  slug: string;
+  hidden?: boolean;
+  category?: 'artwork' | 'performance';
+  year?: string;
+  title: string;
+  en?: CmsProjectText;
+  ru?: CmsProjectText;
+  images?: string[];
+  vimeoId?: string;
+  youtubeId?: string;
+  audioUrl?: string;
+  links?: { url: string; label?: string; label_ru?: string }[];
+}
+
 export interface Contact {
   name: string;
   icon: React.ComponentType<{ className?: string }>;
