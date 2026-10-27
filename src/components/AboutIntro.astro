@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import { bio } from '../data/cv';
+import { getAsset } from '../utils/images';
 import { ui } from '../i18n/ui';
 import type { Lang } from '../types';
 
@@ -9,23 +11,42 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const paragraphs = bio[lang];
+const portrait = getAsset('/images/about/popov_about_2026_01.jpg');
 const cvUrl =
   lang === 'ru'
     ? 'https://drive.google.com/open?id=1faPpIlcHb3q4Pj5JBJOKjqQPWPZriMiI'
-    : 'https://drive.google.com/file/d/1h_vU0aFkpLtUzlAlI11S0bHoopUXG-Ec/view?usp=drive_link';
+    : 'https://drive.google.com/file/d/1h_vU0aFkpLtUzlAlI11S0bHoopUXG-Ec/view?usp=sharing';
 ---
 
-<div class="max-w-[65ch] space-y-4 text-body text-text-muted">
-  {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
-</div>
+<div class="grid gap-10 md:grid-cols-[minmax(0,65ch)_1fr] md:items-start">
+  <div>
+    <div class="max-w-[65ch] space-y-4 text-body text-text-muted">
+      {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
+    </div>
 
-<p class="mt-6 text-sm">
-  <a
-    href={cvUrl}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="text-text underline underline-offset-4 hover:text-text-muted"
-  >
-    {t.downloadCv} ↓
-  </a>
-</p>
+    <p class="mt-6 text-sm">
+      <a
+        href={cvUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-text underline underline-offset-4 hover:text-text-muted"
+      >
+        {t.downloadCv} ↓
+      </a>
+    </p>
+  </div>
+  {
+    portrait && (
+      <Picture
+        src={portrait}
+        alt={t.name}
+        formats={['avif', 'webp']}
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 768px) 480px, 100vw"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-auto rounded-lg grayscale"
+      />
+    )
+  }
+</div>
