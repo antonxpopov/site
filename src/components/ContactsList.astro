@@ -1,0 +1,45 @@
+---
+import { ui } from '../i18n/ui';
+import type { Lang } from '../types';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+
+// TODO: add Instagram / Telegram / Vimeo profile links if you want them here.
+const contacts = [
+  { label: t.contactLabels.email, text: 'snwglb@gmail.com', url: 'mailto:snwglb@gmail.com' },
+  { label: t.contactLabels.phone, text: '+7 950 281-06-85', url: 'tel:+79502810685' },
+  {
+    label: t.contactLabels.bandcamp,
+    text: 'antonpopov.bandcamp.com',
+    url: 'https://antonpopov.bandcamp.com',
+  },
+  {
+    label: t.contactLabels.mixcloud,
+    text: 'mixcloud.com/snwglb',
+    url: 'https://www.mixcloud.com/snwglb/',
+  },
+];
+const isExternal = (url: string) => url.startsWith('http');
+---
+
+<ul class="divide-y divide-border max-w-xl">
+  {
+    contacts.map((c) => (
+      <li class="py-3 grid grid-cols-[6rem_1fr] gap-x-4 text-sm">
+        <span class="text-text-muted">{c.label}</span>
+        <a
+          href={c.url}
+          target={isExternal(c.url) ? '_blank' : undefined}
+          rel={isExternal(c.url) ? 'noopener noreferrer' : undefined}
+          class="text-text underline underline-offset-4 hover:text-text-muted"
+        >
+          {c.text}
+        </a>
+      </li>
+    ))
+  }
+</ul>

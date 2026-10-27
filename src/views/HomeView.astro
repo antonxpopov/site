@@ -1,6 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { ui } from '../i18n/ui';
+import AboutIntro from '../components/AboutIntro.astro';
+import ProjectsList from '../components/ProjectsList.astro';
+import TeachingList from '../components/TeachingList.astro';
+import ContactsList from '../components/ContactsList.astro';
+import { ui, localePath } from '../i18n/ui';
+import { withBase } from '../utils/paths';
 import type { Lang } from '../types';
 
 interface Props {
@@ -8,13 +13,58 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = ui[lang];
+
+const sections = [
+  { id: 'about', label: t.nav.about, href: '/about' },
+  { id: 'projects', label: t.nav.projects, href: '/projects' },
+  { id: 'teaching', label: t.nav.teaching, href: '/teaching' },
+  { id: 'contacts', label: t.nav.contacts, href: '/contacts' },
+] as const;
 ---
 
 <Layout title={t.titles.home} lang={lang} overlay>
-  <main class="min-h-[100svh] bg-bg font-mono flex items-center">
-    <div class="container mx-auto px-6 md:px-8 max-w-container">
-      <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-text">{t.name}</h1>
-      <p class="text-lg md:text-xl text-text-muted mt-4">{t.tagline}</p>
+  <main class="bg-bg font-mono">
+    <div class="min-h-[100svh] flex items-center relative">
+      <div class="container mx-auto px-6 md:px-8 max-w-container">
+        <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-text">{t.name}</h1>
+        <p class="text-lg md:text-xl text-text-muted mt-4">{t.tagline}</p>
+      </div>
+      <a
+        href="#about"
+        aria-label={t.scrollDown}
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 p-2 text-text-muted hover:text-text"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M5 12l7 7 7-7"></path>
+        </svg>
+      </a>
     </div>
+
+    {
+      sections.map((s) => (
+        <section id={s.id} class="border-t border-border py-16 md:py-24">
+          <div class="container mx-auto px-6 md:px-8 max-w-container">
+            <h2 class="text-2xl md:text-3xl font-semibold text-text mb-8">
+              <a href={withBase(localePath(lang, s.href))} class="hover:text-text-muted">
+                {s.label}
+              </a>
+            </h2>
+            {s.id === 'about' && <AboutIntro lang={lang} />}
+            {s.id === 'projects' && <ProjectsList lang={lang} />}
+            {s.id === 'teaching' && <TeachingList lang={lang} nested />}
+            {s.id === 'contacts' && <ContactsList lang={lang} />}
+          </div>
+        </section>
+      ))
+    }
   </main>
 </Layout>

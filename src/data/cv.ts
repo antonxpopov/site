@@ -201,7 +201,7 @@ export const cv: CvSection[] = [
       },
       {
         year: '2024',
-        text: 'The Craftswoman’s Eye (with Kristina Pashkova)',
+        text: 'The Eye of the Mistress (with Kristina Pashkova)',
         ru: 'Глаз мастерицы (совместно с Кристиной Пашковой)',
       },
       {

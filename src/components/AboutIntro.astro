@@ -1,0 +1,31 @@
+---
+import { bio } from '../data/cv';
+import { ui } from '../i18n/ui';
+import type { Lang } from '../types';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const paragraphs = bio[lang];
+const cvUrl =
+  lang === 'ru'
+    ? 'https://drive.google.com/open?id=1faPpIlcHb3q4Pj5JBJOKjqQPWPZriMiI'
+    : 'https://drive.google.com/file/d/1h_vU0aFkpLtUzlAlI11S0bHoopUXG-Ec/view?usp=drive_link';
+---
+
+<div class="max-w-[65ch] space-y-4 text-body text-text-muted">
+  {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
+</div>
+
+<p class="mt-6 text-sm">
+  <a
+    href={cvUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-text underline underline-offset-4 hover:text-text-muted"
+  >
+    {t.downloadCv} ↓
+  </a>
+</p>

@@ -18,6 +18,7 @@ export const ui = {
     },
     menu: 'Menu',
     toTop: 'Back to top',
+    scrollDown: 'Scroll down',
     curators: 'Curators',
     photo: 'Photo',
     slider: { prev: 'Previous photo', next: 'Next photo', label: 'Photos' },
@@ -29,7 +30,7 @@ export const ui = {
     kind: { Lecture: 'Lecture', Workshop: 'Workshop' },
     downloadCv: 'Download CV (PDF)',
     cvHeading: 'CV',
-    contactLabels: { email: 'Email', bandcamp: 'Bandcamp', mixcloud: 'Mixcloud' },
+    contactLabels: { email: 'Email', phone: 'Phone', bandcamp: 'Bandcamp', mixcloud: 'Mixcloud' },
     titles: {
       home: 'Anton Popov — Sound and technology artist',
       projects: 'Projects — Anton Popov',
@@ -54,6 +55,7 @@ export const ui = {
     },
     menu: 'Меню',
     toTop: 'Наверх',
+    scrollDown: 'Прокрутить вниз',
     curators: 'Кураторы',
     photo: 'Фото',
     slider: { prev: 'Предыдущее фото', next: 'Следующее фото', label: 'Фотографии' },
@@ -65,7 +67,7 @@ export const ui = {
     kind: { Lecture: 'Лекция', Workshop: 'Мастер-класс' },
     downloadCv: 'Скачать CV (PDF)',
     cvHeading: 'CV',
-    contactLabels: { email: 'Почта', bandcamp: 'Bandcamp', mixcloud: 'Mixcloud' },
+    contactLabels: { email: 'Почта', phone: 'Телефон', bandcamp: 'Bandcamp', mixcloud: 'Mixcloud' },
     titles: {
       home: 'Антон Попов — звуковой и технологический художник',
       projects: 'Проекты — Антон Попов',

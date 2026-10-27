@@ -39,7 +39,7 @@ const many = slides.length > 1;
                 alt={`${alt} — ${i + 1}`}
                 formats={['avif', 'webp']}
                 widths={[640, 960, 1280, 1800]}
-                sizes="(min-width: 1064px) 1000px, 100vw"
+                sizes="(min-width: 1264px) 1200px, 100vw"
                 loading={i === 0 ? 'eager' : 'lazy'}
                 fetchpriority={i === 0 ? 'high' : 'auto'}
                 decoding={i === 0 ? 'sync' : 'async'}
@@ -122,8 +122,44 @@ const many = slides.length > 1;
     const current = root.querySelector<HTMLElement>('[data-current]');
     if (!track) return;
 
-    const go = (dir: number) =>
-      track.scrollBy({ left: dir * track.clientWidth, behavior: 'smooth' });
+    const count = track.children.length;
+    const index = () => Math.round(track.scrollLeft / track.clientWidth);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const goTo = (i: number) =>
+      track.scrollTo({
+        left: ((i + count) % count) * track.clientWidth,
+        behavior: reduce ? 'auto' : 'smooth',
+      });
+    const go = (dir: number) => {
+      goTo(index() + dir);
+      restart();
+    };
+
+    // Autoplay: one photo per AUTOPLAY_MS, looping. Paused while the visitor hovers,
+    // focuses or touches the slider, while it is off-screen, or the tab is hidden.
+    const AUTOPLAY_MS = 15000;
+    let timer: number | undefined;
+    let hovered = false;
+    let focused = false;
+    let visible = false;
+    const stop = () => window.clearInterval(timer);
+    function restart() {
+      stop();
+      if (count > 1 && visible && !hovered && !focused && !document.hidden) {
+        timer = window.setInterval(() => goTo(index() + 1), AUTOPLAY_MS);
+      }
+    }
+    root.addEventListener('mouseenter', () => ((hovered = true), restart()));
+    root.addEventListener('mouseleave', () => ((hovered = false), restart()));
+    root.addEventListener('focusin', () => ((focused = true), restart()));
+    root.addEventListener('focusout', () => ((focused = false), restart()));
+    track.addEventListener('touchstart', restart, { passive: true });
+    document.addEventListener('visibilitychange', restart);
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      restart();
+    }).observe(root);
+
     root.querySelector('[data-prev]')?.addEventListener('click', () => go(-1));
     root.querySelector('[data-next]')?.addEventListener('click', () => go(1));
 

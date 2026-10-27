@@ -17,7 +17,11 @@ export default {
         accent: token('text'),
       },
       maxWidth: {
-        container: '1000px',
+        container: '1200px',
+      },
+      fontSize: {
+        // Long-form reading text (project, about, teaching paragraphs)
+        body: ['1.0625rem', { lineHeight: '1.75' }],
       },
     },
   },

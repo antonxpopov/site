@@ -4,7 +4,7 @@
   --color-bg: 0 0 0;
   --color-bg-secondary: 26 26 26;
   --color-text: 245 245 245;
-  --color-text-muted: 200 200 200;
+  --color-text-muted: 214 214 214;
   --color-border: 68 68 68;
   --color-focus: 245 245 245;
 }
@@ -20,8 +20,6 @@ body {
   color: rgb(var(--color-text));
   line-height: 1.7;
   font-weight: 500;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 a {

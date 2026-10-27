@@ -23,28 +23,6 @@ export const performances: Performance[] = [
     ru: { title: 'Автодеконструкция', city: 'Владивосток', venue: 'GBRparts, авторазборка' },
   },
   {
-    date: '2025',
-    title: 'Zhest — evening of electroacoustic improvisation',
-    city: 'Vladivostok',
-    venue: 'Korobka Gallery',
-    ru: {
-      title: 'Жесть — вечер электроакустической импровизации',
-      city: 'Владивосток',
-      venue: 'Галерея «Коробка»',
-    },
-  },
-  {
-    date: '2025',
-    title: 'Voicing (concert)',
-    city: 'Moscow',
-    venue: 'Moscow School of Social and Economic Sciences',
-    ru: {
-      title: 'Озвучивание (концерт)',
-      city: 'Москва',
-      venue: 'Московская высшая школа социальных и экономических наук',
-    },
-  },
-  {
     // TODO: confirm year / venue
     date: '2023',
     title: 'Safety Zone',

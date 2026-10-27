@@ -1,0 +1,28 @@
+---
+import EntryList from './EntryList.astro';
+import { artworks } from '../data/projects';
+import { localePath } from '../i18n/ui';
+import { localizeProject } from '../i18n/localize';
+import { withBase } from '../utils/paths';
+import type { Lang } from '../types';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const entries = [...artworks]
+  .sort((a, b) => Number(b.year) - Number(a.year))
+  .map((p) => {
+    const text = localizeProject(p, lang);
+    return {
+      year: p.year ?? '',
+      title: text.title,
+      meta: text.format,
+      href: withBase(localePath(lang, `/projects/${p.slug}`)),
+      thumb: p.imageUrl,
+    };
+  });
+---
+
+<EntryList entries={entries} />
