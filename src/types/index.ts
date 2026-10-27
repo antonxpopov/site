@@ -110,6 +110,8 @@ export interface Lecture {
   venue: string;
   paragraphs: string[];
   images?: string[];
+  /** YouTube video id, e.g. 'Iqc4eetbW5s' */
+  youtubeId?: string;
   ru: { title: string; venue: string; paragraphs: string[] };
 }
 

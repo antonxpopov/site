@@ -55,6 +55,7 @@ export const lectures: Lecture[] = [
       'How traditional rhythms merge with cosmic synthesizers; key artists from Sun Ra to Drexciya; music where past meets future and sound becomes an instrument of memory and resistance.',
     ],
     images: [`${IMG}/popov_afrofuturism_2025_01.jpg`],
+    youtubeId: 'BCgDPJrZO_Y',
     ru: {
       title: 'Афрофутуризм',
       venue: 'Центр современного искусства «Заря», Владивосток',
@@ -77,6 +78,7 @@ export const lectures: Lecture[] = [
       `${IMG}/popov_soviet-electronic-music_2025_01.jpg`,
       `${IMG}/popov_soviet-electronic-music_2025_02.jpg`,
     ],
+    youtubeId: 'Iqc4eetbW5s',
     ru: {
       title: 'Советская электронная музыка',
       venue: 'Центр современного искусства «Заря», Владивосток',

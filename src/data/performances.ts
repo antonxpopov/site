@@ -4,18 +4,6 @@ import type { Performance } from '../types';
 export const performances: Performance[] = [
   {
     date: '2025',
-    title: 'Re:trospection of Sound (audiovisual performance)',
-    city: 'Vladivostok',
-    venue: 'Zarya Center for Contemporary Art',
-    slug: 'retrospection-of-sound',
-    ru: {
-      title: 'Ре:троспекция звука (аудиовизуальный перформанс)',
-      city: 'Владивосток',
-      venue: 'Центр современного искусства «Заря»',
-    },
-  },
-  {
-    date: '2025',
     title: 'Autodeconstruction',
     city: 'Vladivostok',
     venue: 'GBRparts auto salvage yard',
@@ -23,10 +11,16 @@ export const performances: Performance[] = [
     ru: { title: 'Автодеконструкция', city: 'Владивосток', venue: 'GBRparts, авторазборка' },
   },
   {
-    // TODO: confirm year / venue
+    // TODO: confirm year
     date: '2023',
     title: 'Safety Zone',
+    city: 'Vladivostok',
+    venue: 'Zarya Center for Contemporary Art',
     slug: 'safety-zone',
-    ru: { title: 'Безопасная зона' },
+    ru: {
+      title: 'Безопасная зона',
+      city: 'Владивосток',
+      venue: 'Центр современного искусства «Заря»',
+    },
   },
 ];

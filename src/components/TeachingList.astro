@@ -51,6 +51,18 @@ const t = ui[lang];
                 )}
               </div>
             )}
+            {item.youtubeId && (
+              <div class="relative w-full aspect-video bg-bg-secondary rounded-lg overflow-hidden mt-5">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${item.youtubeId}?rel=0`}
+                  class="absolute inset-0 w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                  allowfullscreen
+                  loading="lazy"
+                  title={text.title}
+                />
+              </div>
+            )}
           </div>
         </li>
       );
