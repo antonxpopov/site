@@ -17,7 +17,7 @@ export default {
         accent: token('text'),
       },
       maxWidth: {
-        container: '1200px',
+        container: '1000px',
       },
       fontSize: {
         // Long-form reading text (project, about, teaching paragraphs)

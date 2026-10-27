@@ -39,7 +39,7 @@ const many = slides.length > 1;
                 alt={`${alt} — ${i + 1}`}
                 formats={['avif', 'webp']}
                 widths={[640, 960, 1280, 1800]}
-                sizes="(min-width: 1264px) 1200px, 100vw"
+                sizes="(min-width: 1064px) 1000px, 100vw"
                 loading={i === 0 ? 'eager' : 'lazy'}
                 fetchpriority={i === 0 ? 'high' : 'auto'}
                 decoding={i === 0 ? 'sync' : 'async'}
