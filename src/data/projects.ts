@@ -170,11 +170,16 @@ export const projects: Project[] = [
     venue: 'GBRparts auto salvage yard, Vladivostok',
     description: 'Deconstructive Tape Live in a Vladivostok auto salvage yard.',
     imageUrl: `${IMG}/popov_autodeconstruction_2025_01.jpg`,
-    images: [`${IMG}/popov_autodeconstruction_2025_01.jpg`],
+    images: [
+      `${IMG}/popov_autodeconstruction_2025_01.jpg`,
+      `${IMG}/popov_autodeconstruction_2025_02.jpg`,
+      `${IMG}/popov_autodeconstruction_2025_03.jpg`,
+      `${IMG}/popov_autodeconstruction_2025_04.jpg`,
+    ],
     vimeoId: '1117938842',
     paragraphs: [
-      'An improvised audio performance in the space of an auto salvage yard in Vladivostok, where a car radio and a family archive of audio cassettes become instruments of sound archaeology. Musical fragments on the magnetic tape of the cassettes and “voices of a Japanese interface” pass through deformation noise, looping, and signal feedback.',
-      'Deconstructive Tape Live operates within a poetics of entropy, using the magnetic substrate of audio tape and the skeletal remains of retro car radio technologies as both source and instrument. Staged in the situative wreck yard of Vladivostok, the performance dislocates the notion of fidelity, foregrounding instead the noise of collapse, the residue of signal, the material fatigue of media.',
+      'An improvised audio performance at a Vladivostok auto salvage yard: a car radio and a family archive of cassettes become instruments of sound archaeology. Fragments of music on tape and “voices of a Japanese interface” pass through noise, looping and feedback.',
+      'Deconstructive Tape Live works within a poetics of entropy: instead of fidelity, it foregrounds the noise of collapse, signal residue and the material fatigue of media.',
     ],
   },
   {
@@ -191,8 +196,8 @@ export const projects: Project[] = [
     images: [`${IMG}/popov_safety-zone_2023_01.jpg`, `${IMG}/popov_safety-zone_2023_02.jpg`],
     vimeoId: '1109861598',
     paragraphs: [
-      'A safe zone is a place with special conditions for the use of space, which are aimed at creating a favourable stay for people by eliminating the harmful effects of environmental factors on humans.',
-      'In their performance, the artists raise the issue of memory of those people who have been pushed to the fringes of the city’s consciousness, documenting the space of a cemetery with an instant-print analog camera and a pickup.',
+      'A safety zone is a space with special conditions that protect people from harmful environmental effects.',
+      'The artists address the memory of people pushed to the fringes of the city’s consciousness, documenting a cemetery with an instant analog camera and a pickup.',
     ],
     links: [
       { label: 'Bandcamp', url: 'https://antonpopov.bandcamp.com/track/safe-area-live' },

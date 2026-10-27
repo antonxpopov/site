@@ -6,9 +6,9 @@ export const DEFAULT_LANG: Lang = 'en';
 export const ui = {
   en: {
     name: 'Anton Popov',
-    tagline: 'Sound and technology artist',
+    tagline: 'Sound and technological artist',
     siteDescription:
-      'Portfolio of Anton Popov — sound and technology artist and experimental composer from Vladivostok.',
+      'Portfolio of Anton Popov — sound and technological artist and experimental composer from Vladivostok.',
     nav: {
       about: 'About',
       projects: 'Projects',
@@ -32,7 +32,7 @@ export const ui = {
     cvHeading: 'CV',
     contactLabels: { email: 'Email', phone: 'Phone', bandcamp: 'Bandcamp', mixcloud: 'Mixcloud' },
     titles: {
-      home: 'Anton Popov — Sound and technology artist',
+      home: 'Anton Popov — Sound and technological artist',
       projects: 'Projects — Anton Popov',
       performances: 'Performances — Anton Popov',
       teaching: 'Teaching — Anton Popov',

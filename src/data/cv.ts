@@ -15,7 +15,7 @@ export interface CvSection {
 export const bio = {
   en: [
     'Born in Vladivostok in 1997.',
-    'Sound and technology artist, experimental composer, and researcher of sound and music culture.',
+    'Sound and technological artist, experimental composer, and researcher of sound and music culture.',
     'Creates experimental electronic and electroacoustic music grounded in improvisation, listening, and working with unstable media environments. Researches the production, description, reception, and archiving of sound, as well as the relationships between memory, media materiality, and processes of loss. Develops interactive technological installations in which sound, images, and physical media serve as tools for exploring memory and its modes of representation.',
   ],
   ru: [
