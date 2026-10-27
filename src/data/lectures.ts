@@ -14,6 +14,7 @@ export const lectures: Lecture[] = [
       'How do observation, data collection and work with sources become an art project? The focus is on soundscape and field recording, seen through the anthropology of everyday life, cartography, collective memory and “second nature”.',
       'The whole path of working with material: from recording to cleaning and analysis.',
     ],
+    images: [`${IMG}/popov_raw-data-lecture_2026_01.jpg`],
     ru: {
       title:
         'От сырых данных к звуковой среде: как полевые записи, карты и архивы становятся художественным проектом',

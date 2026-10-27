@@ -32,7 +32,7 @@ export const projects: Project[] = [
     category: 'artwork',
     year: '2024',
     format: 'Experimental music, sound collage',
-    media: 'Audio cassette tape [60′00″]',
+    media: 'Audio cassette tape [60′00″], edition of 50',
     description:
       'A 60-minute ambient cassette built from the artist’s father’s dying family tapes.',
     imageUrl: `${IMG}/popov_re-infinity_2024_01.jpg`,

@@ -8,24 +8,24 @@ import type { Lang } from '../types';
 
 interface Props {
   lang: Lang;
-  /** Rendered under a section h2 (home page) rather than the page h1 */
-  nested?: boolean;
 }
-const { lang, nested = false } = Astro.props;
+const { lang } = Astro.props;
 const t = ui[lang];
-const Title = nested ? 'h3' : 'h2';
 ---
 
 <ul class="divide-y divide-border">
   {
-    lectures.map((item) => {
+    lectures.map((item, i) => {
       const text = localizeLecture(item, lang);
       return (
-        <li class="py-8 grid grid-cols-[3rem_1fr] md:grid-cols-[5rem_1fr] gap-x-4">
+        <li
+          id={`lecture-${i + 1}`}
+          class="scroll-mt-20 py-8 grid grid-cols-[3rem_1fr] md:grid-cols-[5rem_1fr] gap-x-4"
+        >
           <span class="text-text-muted text-sm pt-1">{item.year}</span>
           <div class="max-w-3xl">
             <p class="text-text-muted text-sm">{t.kind[item.kind]}</p>
-            <Title class="text-lg text-text mt-1">{text.title}</Title>
+            <h2 class="text-lg text-text mt-1">{text.title}</h2>
             <p class="text-text-muted text-sm mt-1 mb-4">{text.venue}</p>
             <div class="space-y-3 text-body text-text-muted max-w-[65ch]">
               {text.paragraphs.map((p) => (
