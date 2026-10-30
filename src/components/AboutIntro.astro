@@ -1,7 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
 import { bio } from '../data/cv';
-import { getAsset } from '../utils/images';
 import { ui } from '../i18n/ui';
 import type { Lang } from '../types';
 
@@ -11,14 +9,13 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const paragraphs = bio[lang];
-const portrait = getAsset('/images/about/popov_about_2026_09.jpg');
 const cvUrl =
   lang === 'ru'
     ? 'https://drive.google.com/open?id=1faPpIlcHb3q4Pj5JBJOKjqQPWPZriMiI'
     : 'https://drive.google.com/file/d/1h_vU0aFkpLtUzlAlI11S0bHoopUXG-Ec/view?usp=sharing';
 ---
 
-<div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+<div>
   <div>
     <div class="max-w-[65ch] space-y-4 text-body text-text-muted">
       {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
@@ -35,18 +32,4 @@ const cvUrl =
       </a>
     </p>
   </div>
-  {
-    portrait && (
-      <Picture
-        src={portrait}
-        alt={t.name}
-        formats={['avif', 'webp']}
-        widths={[480, 800, 1200]}
-        sizes="(min-width: 1024px) 288px, (min-width: 640px) 384px, 100vw"
-        loading="lazy"
-        decoding="async"
-        class="w-full max-w-sm lg:max-w-none h-auto rounded-lg grayscale"
-      />
-    )
-  }
 </div>
