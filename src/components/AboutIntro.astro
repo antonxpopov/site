@@ -1,14 +1,17 @@
 ---
 import { bio } from '../data/cv';
 import { ui } from '../i18n/ui';
+import { typo } from '../utils/typo';
 import type { Lang } from '../types';
 
 interface Props {
   lang: Lang;
+  /** Skip this many leading paragraphs (the hero hides the two short intro lines) */
+  from?: number;
 }
-const { lang } = Astro.props;
+const { lang, from = 0 } = Astro.props;
 const t = ui[lang];
-const paragraphs = bio[lang];
+const paragraphs = bio[lang].slice(from).map((p) => typo(p, lang));
 const cvUrl =
   lang === 'ru'
     ? 'https://drive.google.com/open?id=1faPpIlcHb3q4Pj5JBJOKjqQPWPZriMiI'
@@ -18,7 +21,7 @@ const cvUrl =
 <div>
   <div>
     <div class="max-w-[65ch] space-y-4 text-body text-text-muted">
-      {paragraphs.map((p, i) => <p class={i === 1 ? 'text-text' : ''}>{p}</p>)}
+      {paragraphs.map((p, i) => <p class={from + i === 1 ? 'text-text' : ''}>{p}</p>)}
     </div>
 
     <p class="mt-6 text-sm">

@@ -4,6 +4,7 @@ import AboutIntro from '../components/AboutIntro.astro';
 import { bio, cv } from '../data/cv';
 import { ui, localePath } from '../i18n/ui';
 import { withBase } from '../utils/paths';
+import { typo } from '../utils/typo';
 import type { Lang } from '../types';
 
 interface Props {
@@ -36,10 +37,10 @@ const t = ui[lang];
                       href={withBase(localePath(lang, item.href))}
                       class="text-text underline underline-offset-4 hover:text-text-muted"
                     >
-                      {lang === 'ru' ? item.ru : item.text}
+                      {typo(lang === 'ru' ? item.ru : item.text, lang)}
                     </a>
                   ) : (
-                    <span class="text-text">{lang === 'ru' ? item.ru : item.text}</span>
+                    <span class="text-text">{typo(lang === 'ru' ? item.ru : item.text, lang)}</span>
                   )}
                 </li>
               ))}

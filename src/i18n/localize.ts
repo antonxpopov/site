@@ -1,9 +1,14 @@
 import type { Lang, Project, Performance, Lecture } from '../types';
 import { projectsRu } from '../data/projects.ru';
 import { cmsProjectsRu } from '../data/cmsProjects';
+import { typoDeep } from '../utils/typo';
 
 /** Returns the project with text fields in the requested language (EN fallback). */
 export function localizeProject(project: Project, lang: Lang): Project {
+  return typoDeep(pickProject(project, lang), lang);
+}
+
+function pickProject(project: Project, lang: Lang): Project {
   if (lang === 'en') return project;
   const ru = projectsRu[project.slug] ?? cmsProjectsRu[project.slug];
   if (!ru) return project;
@@ -24,11 +29,14 @@ export function localizeProject(project: Project, lang: Lang): Project {
 
 export function localizePerformance(item: Performance, lang: Lang) {
   const text = lang === 'ru' && item.ru ? item.ru : item;
-  return { title: text.title, city: text.city, venue: text.venue };
+  return typoDeep({ title: text.title, city: text.city, venue: text.venue }, lang);
 }
 
 export function localizeLecture(item: Lecture, lang: Lang) {
-  return lang === 'ru'
-    ? { ...item.ru }
-    : { title: item.title, venue: item.venue, paragraphs: item.paragraphs };
+  return typoDeep(
+    lang === 'ru'
+      ? { ...item.ru }
+      : { title: item.title, venue: item.venue, paragraphs: item.paragraphs },
+    lang
+  );
 }
