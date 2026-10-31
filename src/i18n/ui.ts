@@ -6,7 +6,6 @@ export const DEFAULT_LANG: Lang = 'en';
 export const ui = {
   en: {
     name: 'Anton Popov',
-    tagline: 'Sound and technological artist',
     siteDescription:
       'Portfolio of Anton Popov — sound and technological artist and experimental composer from Vladivostok.',
     nav: {
@@ -43,7 +42,6 @@ export const ui = {
   },
   ru: {
     name: 'Антон Попов',
-    tagline: 'Звуковой и технологический художник',
     siteDescription:
       'Портфолио Антона Попова — звукового и технологического художника, экспериментального композитора из Владивостока.',
     nav: {
