@@ -20,7 +20,7 @@ const t = ui[lang];
 const hasAudio = project.audioUrl ? publicFileExists(project.audioUrl) : false;
 
 const vimeo = project.vimeoId
-  ? String(project.vimeoId).match(/(\d{6,})/)?.[1] ?? String(project.vimeoId)
+  ? (String(project.vimeoId).match(/(\d{6,})/)?.[1] ?? String(project.vimeoId))
   : undefined;
 
 const video = vimeo
