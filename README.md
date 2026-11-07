@@ -1,62 +1,56 @@
-# Портфолио (Astro)
+# Портфолио Антона Попова
 
-Минималистичный сайт-портфолио на **Astro 5**, **React** (острова), **TailwindCSS**, **Framer Motion**.
+Двуязычный (EN / RU) минималистичный сайт-портфолио звукового и технологического художника.
+**Astro 5** + **Tailwind CSS 3**, статическая сборка, хостинг — GitHub Pages.
+
+Сайт: <https://antonxpopov.github.io/site/>
 
 ## Быстрый старт
 
+Нужен Node.js 20+.
+
 ```bash
+git clone https://github.com/antonxpopov/site.git
+cd site
 npm install
-npm run dev
+npm run dev        # http://localhost:4321/site/
 ```
 
-Dev-сервер: обычно `http://localhost:4321`.
+| Команда | Что делает |
+| --- | --- |
+| `npm run build` / `preview` | сборка в `dist/` / просмотр сборки |
+| `npm run format` | Prettier (обязательно перед пушем — иначе деплой остановится) |
+| `npm run lint`, `type-check`, `test` | проверки |
+| `npm run peaks -- public/audio/<файл>.mp3` | пики волны для аудиоплеера (нужен ffmpeg) |
 
-```bash
-npm run build      # статика в dist/
-npm run preview    # просмотр сборки
-npm run lint
-npm run type-check
-npm run test
-```
+Перед коммитом: `npm run format && npm run lint && npm run type-check && npm run test && npm run build`.
 
 ## Структура
 
 ```
 src/
-├── components/     # Astro + React (.tsx)
-├── layouts/        # Layout.astro
-├── pages/          # index.astro, project/[id].astro
-├── data/projects.ts
-├── hooks/
-├── types/
-public/audio/       # MP3 для проектов
+  cms/          весь контент в JSON (проекты, лекции, перформансы, о себе, контакты)
+  content/blog/ записи блога (Markdown, по умолчанию скрыты)
+  assets/images/ фото (оптимизируются при сборке)
+  components/, views/, layouts/, pages/ (EN) и pages/ru/ (RU)
+  i18n/         строки интерфейса и локализация
+public/audio/   mp3 и пики волны
+docs/           документация
 ```
 
 ## Контент
 
-- Проекты: `src/data/projects.ts`
-- Hero: `src/components/Hero.tsx`
-- Контакты: `src/components/Contacts.tsx`
-- О себе: `src/components/About.tsx` (пока не подключён в `index.astro`)
+Контент правится через **Pages CMS** (<https://app.pagescms.org>) — без кода и терминала: проекты, лекции, перформансы,
+«обо мне», контакты, блог. Инструкция: [`docs/CMS.md`](docs/CMS.md).
 
-Аудио кладите в `public/audio/` и указывайте путь в `projects.ts`.
+## Документация
 
-## AI-ассистенты (Cursor / Claude Code)
-
-- **`AGENTS.md`** — общие правила и команды для агентов
-- **`CLAUDE.md`** — память Claude Code (импортирует `AGENTS.md`)
-- **`docs/CLAUDE_CODE.md`** — чеклист миграции на Claude Code
+- [`docs/MIGRATION.md`](docs/MIGRATION.md) — полное описание проекта и чек-лист миграции (хостинг, аккаунт, компьютер)
+- [`docs/CMS.md`](docs/CMS.md) — как редактировать сайт через Pages CMS
+- [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md) — правила для ИИ-ассистентов
+- `docs/archive/` — старые заметки код-ревью (справочно)
 
 ## Деплой
 
-Статическая сборка (`dist/`). CI: `.github/workflows/ci.yml`. Публикация на GitHub Pages: `.github/workflows/deploy.yml` (запускается при push в `main`).
-
-Vercel / Netlify: подключите репозиторий или деплойте каталог `dist` после `npm run build`.
-
-## Дополнительная документация
-
-Архив заметок после код-ревью: `docs/archive/` (справочно, может быть устаревшим).
-
-## Редактирование контента
-
-Контент (проекты, лекции, о себе, контакты, блог) редактируется через Pages CMS — см. [docs/CMS.md](docs/CMS.md).
+Push в `main` → GitHub Actions (`.github/workflows/deploy.yml`): lint, type-check, format:check, тесты, сборка, публикация на GitHub Pages.
+`astro.config.mjs`: `site: 'https://antonxpopov.github.io'`, `base: '/site'`. Все внутренние адреса строятся через `withBase()`.

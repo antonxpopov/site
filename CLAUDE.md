@@ -8,4 +8,4 @@
 - Optional: run `/init` once to refine memory; it should extend, not replace, `AGENTS.md`.
 - Personal overrides (URLs, deploy keys): put in gitignored `CLAUDE.local.md`, not in committed files.
 - Do not commit secrets (`.env*`), `node_modules`, or `dist/`.
-- When unsure about prior decisions, read `IMPLEMENTATION_STATUS.md` before large refactors.
+- When unsure about prior decisions, read `docs/MIGRATION.md` (current state) before large refactors; `docs/archive/` is historical.
