@@ -1,0 +1,27 @@
+{
+  "slug": "soundscape-console",
+  "hidden": false,
+  "order": 6,
+  "category": "artwork",
+  "year": "2025",
+  "title": "Soundscape Console",
+  "en": {
+    "description": "Found objects moved across a field become a tactile instrument for listening to field recordings.",
+    "format": "Interactive installation",
+    "media": "Found objects, field recordings, video camera, TouchDesigner",
+    "credits": "With Ivan Kravchuk",
+    "text": "The project is based on a collection of found objects and field recordings gathered and documented in urban spaces — at points where the legacy of human rationality is integrated into the natural order. Each object is connected to a specific soundscape, to the place where it was discovered — a park, a square, a riverbank, or a pond — or to its own acoustic properties.\n\nThe artists propose exploring the acoustic process of space — the symbiosis of the natural and the anthropogenic — through tactile interaction with the found objects. These may include natural elements such as stones, branches, and pieces of bark, as well as by-product artifacts of human presence: plastic, metal. All of them appear on the same plane as equal inhabitants of the space under investigation.\n\nThe viewer interacts with the objects by moving them across the field in different combinations; a camera records their coordinates, and depending on the position of the object on the field, the viewer can manipulate its sonic characteristics.\n\nThe installation transforms the listening of field recordings into a tactile and/or multisensory experience. By moving the objects, the viewer constructs their own perception of the place, forming a unique soundscape."
+  },
+  "ru": {
+    "title": "Саундскейп консоль",
+    "description": "Найденные объекты, перемещаемые по полю, становятся тактильным инструментом для слушания полевых записей.",
+    "format": "Интерактивная инсталляция",
+    "media": "Найденные объекты, полевые записи, видеокамера, TouchDesigner",
+    "credits": "Совместно с Иваном Кравчуком",
+    "text": "Проект основан на коллекции найденных объектов и полевых записей, собранных и задокументированных в городских пространствах — в точках, где наследие человеческой рациональности интегрировано в природное мироустройство. Каждый объект связан с определённым звуковым ландшафтом, местом его обнаружения — в парке, сквере, у реки или пруда — или с его собственными акустическими свойствами."
+  },
+  "images": [
+    "/images/projects/popov_soundscape-console_2025_01.jpg",
+    "/images/projects/popov_soundscape-console_2025_02.jpg"
+  ]
+}

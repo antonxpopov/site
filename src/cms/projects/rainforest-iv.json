@@ -1,0 +1,30 @@
+{
+  "slug": "rainforest-iv",
+  "hidden": false,
+  "order": 5,
+  "category": "artwork",
+  "year": "2020",
+  "title": "Rainforest IV",
+  "en": {
+    "description": "Multi-channel sound installation reconstructed at the Echoes Soundscape and Spatial Music Festival.",
+    "format": "Reinstallation of David Tudor’s Rainforest IV",
+    "media": "Found objects, vibration speaker, MAX/MSP",
+    "venue": "ZIL Cultural Center, Echoes Soundscape and Spatial Music Festival",
+    "curators": "Andrey Smirnov, Maria Molokova",
+    "text": "David Tudor’s Rainforest IV installation, which artists, musicians, composers and engineers reconstructed in the sound laboratory at the Echoes Soundscape and Spatial Music Festival. Tudor’s project is an experimental music classic and was first played in Russia.\n\nThe current version of Rainforest IV assumes the relationship of each object with the personal space of its creator. Relocated to the showroom, objects are combined into a multi-channel sound installation and explore the possibilities of physical presence and interaction."
+  },
+  "ru": {
+    "title": "Rainforest IV",
+    "description": "Многоканальная звуковая инсталляция, воссозданная на фестивале звукового пейзажа и пространственной музыки «Отзвук».",
+    "format": "Реинсталляция Rainforest IV Дэвида Тюдора",
+    "media": "Найденные объекты, вибро-динамик, MAX/MSP",
+    "venue": "ДК «ЗИЛ», Фестиваль саундскейпа и пространственной музыки «Отзвук»",
+    "curators": "Андрей Смирнов, Мария Молокова",
+    "text": "Проект Дэвида Тюдора — классика экспериментальной музыки, предполагающая возможность выбирать любые объекты для своеобразной «звуковой игры». Актуальная версия Rainforest IV осуществляет взаимосвязь каждого объекта с личным пространством его создателя. Перемещённые в выставочное пространство, объекты образуют инсталляцию, которая представляет собой портал в «параллельные звуковые миры»."
+  },
+  "images": [
+    "/images/projects/popov_rainforest-iv_2020_01.jpg",
+    "/images/projects/popov_rainforest-iv_2020_02.jpg"
+  ],
+  "vimeoId": "467802596"
+}

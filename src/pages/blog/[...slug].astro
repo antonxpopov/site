@@ -1,0 +1,20 @@
+---
+import BlogIndexView from '../../views/BlogIndexView.astro';
+import BlogPostView from '../../views/BlogPostView.astro';
+import { getPosts } from '../../utils/blog';
+import { blogBuilt } from '../../constants/blog';
+
+// One route for /blog and /blog/<slug>; with BLOG_MODE = 'off' no path is generated.
+export async function getStaticPaths() {
+  if (!blogBuilt) return [];
+  const posts = await getPosts('en');
+  return [
+    { params: { slug: undefined }, props: { post: undefined } },
+    ...posts.map((post) => ({ params: { slug: post.slug }, props: { post } })),
+  ];
+}
+
+const { post } = Astro.props;
+---
+
+{post ? <BlogPostView lang="en" post={post} /> : <BlogIndexView lang="en" />}

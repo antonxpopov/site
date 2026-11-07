@@ -1,3 +1,6 @@
+import about from '../cms/about.json';
+import { toParagraphs } from '../utils/cmsProject';
+
 export interface CvItem {
   year: string;
   text: string;
@@ -12,17 +15,10 @@ export interface CvSection {
   items: CvItem[];
 }
 
+// The short biography is edited through Pages CMS (src/cms/about.json); paragraphs are separated by a blank line.
 export const bio = {
-  en: [
-    'Born in Vladivostok in 1997.',
-    'Sound and technological artist, experimental composer, and researcher of sound and music culture.',
-    'Creates experimental electronic and electroacoustic music grounded in improvisation, listening, and working with unstable media environments. Researches the production, description, reception, and archiving of sound, as well as the relationships between memory, media materiality, and processes of loss. Develops interactive technological installations in which sound, images, and physical media serve as tools for exploring memory and its modes of representation.',
-  ],
-  ru: [
-    'Родился во Владивостоке в 1997 году.',
-    'Звуковой и технологический художник, экспериментальный композитор, исследователь звуковой и музыкальной культуры.',
-    'Создаёт экспериментальную электронную и электроакустическую музыку, основанную на импровизации, слушании и работе с нестабильными медиасредами. Исследует методы производства, описания, рецепции и архивации звука, а также отношения между памятью, материальностью медиа и процессами утраты. Разрабатывает интерактивные технологические инсталляции, в которых звук, изображение и материальные носители становятся инструментами исследования памяти и способов её репрезентации.',
-  ],
+  en: toParagraphs(about.en.text) ?? [],
+  ru: toParagraphs(about.ru.text) ?? [],
 };
 
 export const cv: CvSection[] = [

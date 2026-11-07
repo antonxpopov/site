@@ -16,6 +16,11 @@ const text = localizeProject(project, lang);
 const suffix = lang === 'ru' ? 'Антон Попов' : 'Anton Popov';
 ---
 
-<Layout title={`${text.title} — ${suffix}`} description={text.description} lang={lang}>
+<Layout
+  title={`${text.title} — ${suffix}`}
+  description={text.description}
+  lang={lang}
+  image={project.imageUrl}
+>
   <ProjectDetail project={text} backHref={`/${section}`} backLabel={t.back[section]} lang={lang} />
 </Layout>

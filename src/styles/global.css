@@ -14,6 +14,12 @@ html {
   color-scheme: dark;
 }
 
+/* Headings use a proportional face; body text stays monospace. */
+h1,
+h2 {
+  font-family: 'Geologica', 'Source Code Pro', system-ui, sans-serif;
+}
+
 body {
   font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Courier New', monospace;
   background-color: rgb(var(--color-bg));
@@ -54,4 +60,94 @@ a {
 /* Hide the default disclosure triangle in <summary> (Safari) */
 summary::-webkit-details-marker {
   display: none;
+}
+
+/* Larger touch area (≥44px) without changing the layout: extends the link's hit box */
+.tap {
+  position: relative;
+}
+.tap::after {
+  content: '';
+  position: absolute;
+  inset: -0.75rem -0.5rem;
+}
+
+/* Skip link: visible only when focused with the keyboard */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 60;
+  padding: 0.5rem 0.75rem;
+  background: rgb(var(--color-bg));
+  border: 1px solid rgb(var(--color-border));
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Thin dividers between list items: a hairline (0.5px) on retina screens,
+   a softer 1px line elsewhere. Use instead of `divide-y divide-border`. */
+.divide-thin > * + * {
+  border-top: 1px solid rgb(var(--color-border) / 0.55);
+}
+@media (min-resolution: 2dppx) {
+  .divide-thin > * + * {
+    border-top: 0.5px solid rgb(var(--color-border));
+  }
+}
+
+/* Hairline borders (0.5px on retina, 1px elsewhere); colour comes from `border-border`. */
+.hairline-t {
+  border-top-width: 1px;
+}
+.hairline-b {
+  border-bottom-width: 1px;
+}
+@media (min-resolution: 2dppx) {
+  .hairline-t {
+    border-top-width: 0.5px;
+  }
+  .hairline-b {
+    border-bottom-width: 0.5px;
+  }
+}
+
+/* Scroll reveal: blocks fade in and rise slightly as they enter the viewport
+   (script: components/ScrollEffects.astro). Without JS everything stays visible. */
+:root {
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-duration: 800ms;
+}
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 1.1rem, 0);
+  transition:
+    opacity var(--reveal-duration) var(--ease-enter),
+    transform var(--reveal-duration) var(--ease-enter);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Thin reading-progress line at the very top of the page */
+.scroll-progress {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgb(var(--color-text));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
 }

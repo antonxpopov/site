@@ -13,18 +13,20 @@
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,astro,json,css}\"",
     "type-check": "astro sync && tsc --noEmit",
     "test": "vitest run",
+    "peaks": "node scripts/make-peaks.mjs",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@astrojs/tailwind": "^6.0.2",
-    "typograf": "^7.8.0",
+    "@fontsource/geologica": "^5.3.0",
     "@fontsource/source-code-pro": "^5.2.0",
     "astro": "^5.15.4",
     "framer-motion": "^10.16.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "typograf": "^7.8.0",
     "wavesurfer.js": "^8.0.3"
   },
   "engines": {

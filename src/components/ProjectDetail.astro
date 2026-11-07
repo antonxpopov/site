@@ -5,6 +5,7 @@ import { withBase } from '../utils/paths';
 import { localePath, ui } from '../i18n/ui';
 import CalameoEmbed from './CalameoEmbed.astro';
 import AudioWave from './AudioWave.astro';
+import VideoEmbed from './VideoEmbed.astro';
 import { publicFileExists } from '../utils/audio';
 
 interface Props {
@@ -19,20 +20,21 @@ const t = ui[lang];
 const hasAudio = project.audioUrl ? publicFileExists(project.audioUrl) : false;
 
 const vimeo = project.vimeoId
-  ? (String(project.vimeoId).match(/(\d{6,})/)?.[1] ?? String(project.vimeoId))
+  ? String(project.vimeoId).match(/(\d{6,})/)?.[1] ?? String(project.vimeoId)
   : undefined;
 
-const videoSrc = vimeo
-  ? `https://player.vimeo.com/video/${vimeo}?title=0&byline=0&portrait=0`
+const video = vimeo
+  ? { provider: 'vimeo' as const, id: vimeo }
   : project.youtubeId
-    ? `https://www.youtube-nocookie.com/embed/${project.youtubeId}?rel=0`
+    ? { provider: 'youtube' as const, id: project.youtubeId }
     : undefined;
 ---
 
-<main class="min-h-screen bg-bg pt-12 pb-24 font-mono">
-  <div class="container mx-auto px-6 md:px-8 max-w-container">
-    <a href={withBase(localePath(lang, backHref))} class="text-sm text-text-muted hover:text-text"
-      >← {backLabel}</a
+<main id="main" class="min-h-screen bg-bg pt-12 pb-24 font-mono">
+  <div class="container mx-auto px-5 md:px-8 max-w-container">
+    <a
+      href={withBase(localePath(lang, backHref))}
+      class="tap text-sm text-text-muted hover:text-text">← {backLabel}</a
     >
 
     <!-- 1 year · 2 title · 3 technical description -->
@@ -45,8 +47,8 @@ const videoSrc = vimeo
           project.credits ||
           project.venue ||
           project.curators) && (
-          <ul class="text-sm text-text-muted space-y-1">
-            {project.credits && <li class="font-semibold text-text">{project.credits}</li>}
+          <ul class="mt-6 border-l border-border pl-4 text-[0.8125rem] leading-relaxed tracking-wide text-text-muted/75 space-y-1.5">
+            {project.credits && <li class="font-semibold text-text/90">{project.credits}</li>}
             {project.format && <li>{project.format}</li>}
             {project.media && <li>{project.media}</li>}
             {project.venue && <li>{project.venue}</li>}
@@ -74,7 +76,12 @@ const videoSrc = vimeo
     <!-- 5 photos (slider) -->
     {
       project.calameoId ? (
-        <CalameoEmbed id={project.calameoId} title={project.title} lang={lang} />
+        <CalameoEmbed
+          id={project.calameoId}
+          title={project.title}
+          lang={lang}
+          cover={project.imageUrl}
+        />
       ) : (
         project.images &&
         project.images.length > 0 && (
@@ -91,17 +98,14 @@ const videoSrc = vimeo
 
     <!-- 6 video -->
     {
-      videoSrc && (
-        <div class="relative w-full aspect-video bg-bg-secondary rounded-lg overflow-hidden mb-10">
-          <iframe
-            src={videoSrc}
-            class="absolute inset-0 w-full h-full"
-            allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-            allowfullscreen
-            loading="lazy"
-            title={project.title}
-          />
-        </div>
+      video && (
+        <VideoEmbed
+          provider={video.provider}
+          id={video.id}
+          title={project.title}
+          lang={lang}
+          class="mb-10"
+        />
       )
     }
 
@@ -114,7 +118,7 @@ const videoSrc = vimeo
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-text underline underline-offset-4 hover:text-text-muted"
+                class="tap text-text underline underline-offset-4 hover:text-text-muted"
               >
                 {link.label} ↗
               </a>

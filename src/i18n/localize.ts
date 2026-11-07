@@ -1,5 +1,4 @@
 import type { Lang, Project, Performance, Lecture } from '../types';
-import { projectsRu } from '../data/projects.ru';
 import { cmsProjectsRu } from '../data/cmsProjects';
 import { typoDeep } from '../utils/typo';
 
@@ -10,7 +9,7 @@ export function localizeProject(project: Project, lang: Lang): Project {
 
 function pickProject(project: Project, lang: Lang): Project {
   if (lang === 'en') return project;
-  const ru = projectsRu[project.slug] ?? cmsProjectsRu[project.slug];
+  const ru = cmsProjectsRu[project.slug];
   if (!ru) return project;
   return {
     ...project,

@@ -1,0 +1,69 @@
+---
+import type { Lang } from '../types';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  provider: 'vimeo' | 'youtube';
+  id: string;
+  title: string;
+  lang: Lang;
+  class?: string;
+}
+const { provider, id, title, lang, class: className = '' } = Astro.props;
+const t = ui[lang].video;
+const src =
+  provider === 'vimeo'
+    ? `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0`
+    : `https://www.youtube-nocookie.com/embed/${id}?rel=0`;
+const watchUrl =
+  provider === 'vimeo' ? `https://vimeo.com/${id}` : `https://www.youtube.com/watch?v=${id}`;
+const providerName = provider === 'vimeo' ? 'Vimeo' : 'YouTube';
+---
+
+<!-- The player is loaded only after a click: faster page, no third-party requests until needed. -->
+<div
+  class:list={[
+    'relative w-full aspect-video bg-bg-secondary rounded-lg overflow-hidden border border-border',
+    className,
+  ]}
+  data-video
+  data-src={src}
+  data-title={title}
+>
+  <button
+    type="button"
+    data-load
+    aria-label={`${t.play}: ${title}`}
+    class="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-text hover:bg-bg/40 transition-colors"
+  >
+    <span
+      class="w-14 h-14 rounded-full border border-text flex items-center justify-center"
+      aria-hidden="true"
+    >
+      <svg class="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"
+        ><path d="M8 5v14l11-7z"></path></svg
+      >
+    </span>
+    <span class="text-base">{t.play}</span>
+    <span class="text-sm text-text-muted">{t.hint} {providerName}</span>
+  </button>
+  <noscript>
+    <a href={watchUrl} class="absolute inset-0 flex items-center justify-center underline"
+      >{providerName} ↗</a
+    >
+  </noscript>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-video]').forEach((box) => {
+    box.querySelector('[data-load]')?.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `${box.dataset.src}${box.dataset.src!.includes('?') ? '&' : '?'}autoplay=1`;
+      frame.title = box.dataset.title ?? '';
+      frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+      frame.allowFullscreen = true;
+      frame.className = 'absolute inset-0 w-full h-full';
+      box.replaceChildren(frame);
+    });
+  });
+</script>

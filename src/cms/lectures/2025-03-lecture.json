@@ -1,0 +1,18 @@
+{
+  "slug": "2025-03-lecture",
+  "order": 3,
+  "year": "2025",
+  "kind": "Lecture",
+  "title": "Afrofuturism",
+  "venue": "Zarya Center for Contemporary Art, Vladivostok",
+  "text": "A journey into Afrofuturism, where music becomes the voice of the African future. The movement’s roots go back to the early 20th century, but its name appeared only in the 1990s, in Mark Dery’s essay “Black to the Future”. Through science fiction and interplanetary travel, Afrofuturism offered a hopeful image of the Afro-American future.\n\nHow traditional rhythms merge with cosmic synthesizers; key artists from Sun Ra to Drexciya; music where past meets future and sound becomes an instrument of memory and resistance.",
+  "images": [
+    "/images/education/popov_afrofuturism_2025_01.jpg"
+  ],
+  "youtubeId": "BCgDPJrZO_Y",
+  "ru": {
+    "title": "Афрофутуризм",
+    "venue": "Центр современного искусства «Заря», Владивосток",
+    "text": "Путешествие в мир афрофутуризма, где музыка становится голосом африканского будущего. Корни движения уходят в начало XX века, но название появилось лишь в 1990-е — в эссе Марка Дери «Чёрное в будущее». Через научную фантастику и межпланетные путешествия афрофутуризм предлагал обнадёживающий образ афроамериканского будущего.\n\nКак традиционные ритмы соединяются с космическими синтезаторами; ключевые исполнители — от Sun Ra до Drexciya; музыка, где прошлое встречается с будущим, а звук становится инструментом памяти и сопротивления."
+  }
+}

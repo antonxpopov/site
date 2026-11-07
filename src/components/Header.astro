@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../utils/paths';
 import { ui, localePath } from '../i18n/ui';
+import { blogPublic } from '../constants/blog';
 import type { Lang } from '../types';
 
 interface Props {
@@ -20,6 +21,7 @@ const links = [
   { label: t.nav.teaching, href: '/teaching' },
   { label: t.nav.performances, href: '/performances' },
   { label: t.nav.contacts, href: '/contacts' },
+  ...(blogPublic ? [{ label: t.nav.blog, href: '/blog' }] : []),
 ];
 
 const isActive = (href: string) => neutralPath === href || neutralPath.startsWith(`${href}/`);
@@ -32,11 +34,14 @@ const langs: { code: Lang; label: string }[] = [
 <header
   class:list={[
     'top-0 inset-x-0 z-50 font-mono',
-    overlay ? 'absolute' : 'sticky bg-bg/90 backdrop-blur border-b border-border',
+    overlay
+      ? 'fixed hairline-b border-transparent transition-colors duration-200'
+      : 'sticky bg-bg/90 backdrop-blur hairline-b border-border',
   ]}
+  data-overlay={overlay ? '' : undefined}
 >
   <div
-    class="container mx-auto px-6 md:px-8 max-w-container h-16 flex items-center justify-between gap-6"
+    class="container mx-auto px-5 md:px-8 max-w-container h-16 flex items-center justify-between gap-6"
   >
     <!-- Language switch -->
     <div class="flex items-center gap-1 text-sm" role="group" aria-label={t.switchLabel}>
@@ -53,6 +58,7 @@ const langs: { code: Lang; label: string }[] = [
               hreflang={l.code}
               lang={l.code}
               class:list={[
+                'tap px-1',
                 l.code === lang ? 'text-text font-semibold' : 'text-text-muted hover:text-text',
               ]}
               aria-current={l.code === lang ? 'true' : undefined}
@@ -64,7 +70,7 @@ const langs: { code: Lang; label: string }[] = [
       }
     </div>
 
-    <nav class="hidden md:flex gap-6 text-sm" aria-label={t.mainNav}>
+    <nav class="hidden md:flex gap-6 text-sm font-heading font-medium" aria-label={t.mainNav}>
       {
         links.map((l) => (
           <a
@@ -83,7 +89,7 @@ const langs: { code: Lang; label: string }[] = [
 
     <details class="group md:hidden relative">
       <summary
-        class="list-none [&::-webkit-details-marker]:hidden cursor-pointer text-text p-2 -m-2"
+        class="list-none [&::-webkit-details-marker]:hidden cursor-pointer text-text p-3 -m-3"
         aria-label={t.menu}
       >
         <svg
@@ -100,14 +106,14 @@ const langs: { code: Lang; label: string }[] = [
         </svg>
       </summary>
       <nav
-        class="absolute right-0 top-8 w-52 bg-bg border border-border rounded-lg p-4 flex flex-col gap-3 text-sm"
+        class="absolute right-0 top-9 w-60 bg-bg border border-border rounded-lg p-2 flex flex-col text-base font-heading font-medium"
         aria-label={t.mainNav}
       >
         {
           links.map((l) => (
             <a
               href={withBase(localePath(lang, l.href))}
-              class={isActive(l.href) ? 'text-text' : 'text-text-muted'}
+              class:list={['py-3 px-3 rounded', isActive(l.href) ? 'text-text' : 'text-text-muted']}
             >
               {l.label}
             </a>
@@ -117,6 +123,21 @@ const langs: { code: Lang; label: string }[] = [
     </details>
   </div>
 </header>
+
+<script>
+  // Transparent over the hero, solid once the page is scrolled.
+  const bar = document.querySelector<HTMLElement>('header[data-overlay]');
+  if (bar) {
+    const solid = ['bg-bg/90', 'backdrop-blur', 'border-border'];
+    const update = () => {
+      const on = window.scrollY > 40;
+      solid.forEach((c) => bar.classList.toggle(c, on));
+      bar.classList.toggle('border-transparent', !on);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>
 
 <script>
   // Close the mobile <details> menu on outside click or Esc.

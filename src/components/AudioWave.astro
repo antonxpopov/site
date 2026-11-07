@@ -2,6 +2,7 @@
 import type { Lang } from '../types';
 import { ui } from '../i18n/ui';
 import { withBase } from '../utils/paths';
+import { readPeaks } from '../utils/audio';
 
 interface Props {
   src: string;
@@ -10,6 +11,7 @@ interface Props {
 }
 const { src, title, lang } = Astro.props;
 const t = ui[lang].audio;
+const peaks = readPeaks(src);
 ---
 
 <section
@@ -17,6 +19,8 @@ const t = ui[lang].audio;
   aria-label={t.label}
   data-audio
   data-src={encodeURI(withBase(src))}
+  data-peaks={peaks ? JSON.stringify(peaks.peaks) : undefined}
+  data-duration-s={peaks?.duration}
 >
   <div class="flex items-center gap-4 border border-border rounded-lg p-3 md:p-4">
     <button
@@ -26,7 +30,7 @@ const t = ui[lang].audio;
       aria-label={t.play}
       data-label-play={t.play}
       data-label-pause={t.pause}
-      class="shrink-0 w-10 h-10 rounded-full border border-border text-text flex items-center justify-center hover:bg-bg-secondary disabled:opacity-40 transition-colors"
+      class="shrink-0 w-11 h-11 rounded-full border border-border text-text flex items-center justify-center hover:bg-bg-secondary disabled:opacity-40 transition-colors"
     >
       <svg data-icon-play class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
         ><path d="M8 5v14l11-7z"></path></svg
@@ -41,7 +45,7 @@ const t = ui[lang].audio;
     </button>
     <div class="min-w-0 flex-1">
       <div data-wave class="w-full h-16" role="img" aria-label={`${t.label}: ${title}`}></div>
-      <p class="mt-1 text-xs text-text-muted flex justify-between">
+      <p class="mt-1 text-sm text-text-muted flex justify-between">
         <span data-time>0:00</span>
         <span data-status>{t.loading}</span>
         <span data-duration>–:––</span>
@@ -70,9 +74,22 @@ const t = ui[lang].audio;
       const { default: WaveSurfer } = await import('wavesurfer.js');
       const css = (v: string) =>
         `rgb(${getComputedStyle(document.documentElement).getPropertyValue(v).trim().replace(/ /g, ',')})`;
+      const peaks: number[] | undefined = root.dataset.peaks
+        ? JSON.parse(root.dataset.peaks)
+        : undefined;
+      const total = Number(root.dataset.durationS) || undefined;
+      // With pre-computed peaks the mp3 is not downloaded until the first Play.
+      let media: HTMLAudioElement | undefined;
+      if (peaks && total) {
+        media = new Audio();
+        media.preload = 'none';
+        media.src = root.dataset.src!;
+      }
       const ws = WaveSurfer.create({
         container: wave,
-        url: root.dataset.src!,
+        ...(media && peaks && total
+          ? { media, peaks: [peaks], duration: total }
+          : { url: root.dataset.src! }),
         height: 64,
         barWidth: 2,
         barGap: 2,
@@ -82,10 +99,17 @@ const t = ui[lang].audio;
         progressColor: css('--color-text'),
         normalize: true,
       });
-      ws.on('ready', () => {
+      const ready = () => {
         btn.disabled = false;
         status.textContent = '';
-        dur.textContent = fmt(ws.getDuration());
+        dur.textContent = fmt(ws.getDuration() || total || 0);
+      };
+      ws.on('ready', ready);
+      ws.on('waiting', () => {
+        status.textContent = '…';
+      });
+      ws.on('play', () => {
+        status.textContent = '';
       });
       ws.on('error', () => {
         status.textContent = '×';

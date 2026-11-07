@@ -1,13 +1,17 @@
 ---
 import type { Lang } from '../types';
+import { Image } from 'astro:assets';
 import { ui } from '../i18n/ui';
+import { getAsset } from '../utils/images';
 
 interface Props {
   id: string;
   title: string;
   lang: Lang;
+  cover?: string;
 }
-const { id, title, lang } = Astro.props;
+const { id, title, lang, cover } = Astro.props;
+const coverAsset = cover ? getAsset(cover) : undefined;
 const t = ui[lang].calameo;
 const src = `https://v.calameo.com/?bkcode=${id}&mode=mini&view=slide&showsharemenu=0`;
 ---
@@ -19,10 +23,23 @@ const src = `https://v.calameo.com/?bkcode=${id}&mode=mini&view=slide&showsharem
     data-src={src}
     data-title={title}
   >
+    {
+      coverAsset && (
+        <Image
+          src={coverAsset}
+          alt=""
+          width={1200}
+          height={800}
+          format="webp"
+          quality={70}
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      )
+    }
     <button
       type="button"
       data-load
-      class="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-2 text-text hover:bg-black/30 transition-colors"
+      class="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-2 text-text bg-black/55 hover:bg-black/40 transition-colors"
     >
       <span class="text-lg">{t.open}</span>
       <span class="text-sm text-text-muted">{t.hint}</span>

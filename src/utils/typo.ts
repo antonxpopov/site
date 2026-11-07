@@ -8,6 +8,12 @@ const engines: Record<Lang, Typograf> = {
   en: new Typograf({ locale: ['en-US'] }),
 };
 
+// Never add a space after a colon: it turns the title "Re:trospection" into "Re: trospection".
+for (const engine of Object.values(engines)) engine.disableRule('common/space/afterColon');
+// English does not glue short words with non-breaking spaces; in a narrow monospace column
+// it only leaves ragged lines. Russian keeps the rule (prepositions must not dangle).
+engines.en.disableRule('common/nbsp/*');
+
 /** Fields that hold URLs, ids or codes and must stay untouched. */
 const SKIP = new Set([
   'url',

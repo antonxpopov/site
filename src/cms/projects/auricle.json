@@ -1,0 +1,23 @@
+{
+  "slug": "auricle",
+  "hidden": false,
+  "order": 3,
+  "category": "artwork",
+  "year": "2023",
+  "title": "Auricle",
+  "en": {
+    "description": "The ocean in a seashell: sound, memory and nostalgia for the lives of ancient sea creatures.",
+    "format": "Soundscape, digital recording",
+    "text": "The high-pitched noise from a sea shell held to the ear is associated by many with a childhood belief in the inexplicable magic of the sound of waves preserved in the shell. The shell’s ocean-like resonance is partly due to the similarities between the sounds of airflow and ocean movement. The shell skeletons thrown ashore serve as a shadow of the past, a memory and nostalgia for the lives of ancient sea creatures.\n\nLittering the entire shore, to the human ear they sound like bones when a human foot treads on them, and when hit by a coastal wave, they resemble the sound of a rockfall."
+  },
+  "ru": {
+    "title": "Ушная раковина",
+    "description": "Океан в морской раковине: звук, память и ностальгия по жизни древних морских обитателей.",
+    "format": "Саундскейп, цифровая запись",
+    "text": "Высокочастотный шум из морской ракушки, поднесённой к уху, у многих ассоциируется с детской верой в необъяснимую магию звука волны, законсервированного в раковине. Океаноподобный резонанс ушной раковины частично объясняется сходством между звуками воздушного потока и движения океана. Выброшенные на берег скелеты ракушек служат тенью прошлого, памятью и ностальгией по жизни древних морских обитателей."
+  },
+  "images": [
+    "/images/projects/popov_auricle_2023_01.jpg"
+  ],
+  "audioUrl": "/audio/popov_auricle_2023.mp3"
+}

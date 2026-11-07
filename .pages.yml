@@ -1,10 +1,15 @@
-# Pages CMS (https://pagescms.org) — content editor for new projects.
-# Built-in projects stay in src/data/projects.ts; here they can only be hidden.
+# Pages CMS (https://pagescms.org) — editor for all site content.
+# Everything below is stored as JSON/Markdown in the repository (src/cms, src/content).
 media:
   - name: images
     label: Фото проектов
     input: src/assets/images/projects
     output: /images/projects
+    extensions: [jpg, jpeg, png, webp]
+  - name: education
+    label: Фото лекций и мастер-классов
+    input: src/assets/images/education
+    output: /images/education
     extensions: [jpg, jpeg, png, webp]
   - name: audio
     label: Аудио
@@ -14,7 +19,7 @@ media:
 
 content:
   - name: projects
-    label: Новые проекты
+    label: Проекты и перформансы
     type: collection
     path: src/cms/projects
     format: json
@@ -37,6 +42,10 @@ content:
         pattern:
           regex: '^[a-z0-9]+(-[a-z0-9]+)*$'
           message: 'Только строчные латинские буквы, цифры и дефис'
+      - name: order
+        label: Порядок внутри года
+        description: '1 — первым. Проекты сортируются по году (новые сверху), а внутри одного года — по этому числу.'
+        type: number
       - name: category
         label: Раздел
         type: select
@@ -124,11 +133,21 @@ content:
             type: text
       - name: images
         label: Фото
-        description: 'Первое фото — обложка. Имена файлов: popov_<адрес>_<год>_01.jpg'
+        description: 'Порядок фото = порядок в слайдере; первое — обложка. Имена файлов: popov_<адрес>_<год>_01.jpg'
         type: image
         options:
           media: images
           multiple: true
+      - name: cover
+        label: Обложка для списков (необязательно)
+        description: 'Если в списке проектов должна быть другая картинка, чем первое фото слайдера.'
+        type: image
+        options:
+          media: images
+      - name: calameoId
+        label: Calameo (зин)
+        description: 'Код книги из ссылки calameo.com/books/КОД. Если указан, вместо слайдера показывается зин.'
+        type: string
       - name: vimeoId
         label: Vimeo ID
         description: 'Число из ссылки vimeo.com/1095200572'
@@ -157,23 +176,203 @@ content:
             label: Подпись (RU)
             type: string
 
-  - name: visibility
-    label: Видимость проектов
-    type: file
-    path: src/cms/visibility.json
-    format: json
+  - name: blog_en
+    label: Блог (EN)
+    type: collection
+    path: src/content/blog/en
+    format: yaml-frontmatter
+    filename: '{fields.slug}.md'
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date]
     fields:
-      - name: hidden
-        label: Скрыть с сайта
+      - name: slug
+        label: Адрес записи (латиница)
+        description: 'Например new-work-notes. Для русской версии используйте тот же адрес.'
+        type: string
+        required: true
+        pattern:
+          regex: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          message: 'Только строчные латинские буквы, цифры и дефис'
+      - { name: draft, label: Черновик, type: boolean, default: true }
+      - { name: title, label: Заголовок, type: string, required: true }
+      - { name: date, label: Дата, type: date, required: true }
+      - { name: summary, label: Краткое описание, type: text }
+      - { name: cover, label: Обложка (путь к фото), type: string }
+      - { name: project, label: Связанный проект (slug), type: string }
+      - { name: body, label: Текст, type: rich-text }
+
+  - name: blog_ru
+    label: Блог (RU)
+    type: collection
+    path: src/content/blog/ru
+    format: yaml-frontmatter
+    filename: '{fields.slug}.md'
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date]
+    fields:
+      - name: slug
+        label: Адрес записи (латиница, как у EN)
+        type: string
+        required: true
+        pattern:
+          regex: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          message: 'Только строчные латинские буквы, цифры и дефис'
+      - { name: draft, label: Черновик, type: boolean, default: true }
+      - { name: title, label: Заголовок, type: string, required: true }
+      - { name: date, label: Дата, type: date, required: true }
+      - { name: summary, label: Краткое описание, type: text }
+      - { name: cover, label: Обложка (путь к фото), type: string }
+      - { name: project, label: Связанный проект (slug), type: string }
+      - { name: body, label: Текст, type: rich-text }
+
+  - name: lectures
+    label: Лекции и мастер-классы
+    type: collection
+    path: src/cms/lectures
+    format: json
+    filename: '{fields.slug}.json'
+    view:
+      fields: [title, year, kind]
+      primary: title
+      sort: [year]
+    fields:
+      - name: slug
+        label: Имя файла (латиница)
+        description: 'Например 2026-new-lecture. После создания не менять.'
+        type: string
+        required: true
+        pattern:
+          regex: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          message: 'Только строчные латинские буквы, цифры и дефис'
+      - name: year
+        label: Год
+        type: string
+        required: true
+        pattern:
+          regex: '^\d{4}$'
+          message: 'Четыре цифры'
+      - name: order
+        label: Порядок внутри года
+        description: '1 — первым.'
+        type: number
+      - name: kind
+        label: Тип
+        type: select
+        default: Lecture
+        options:
+          values:
+            - { value: Lecture, label: Лекция }
+            - { value: Workshop, label: Мастер-класс }
+      - { name: title, label: Название (EN), type: string, required: true }
+      - { name: venue, label: Место (EN), type: string }
+      - {
+          name: text,
+          label: Описание (EN),
+          description: Абзацы разделяй пустой строкой.,
+          type: text,
+        }
+      - name: ru
+        label: Русская версия
         type: object
         fields:
-          - { name: retrospection-of-sound, label: 'Re:trospection of Sound', type: boolean }
-          - { name: re-infinity, label: 'RE∞', type: boolean }
-          - { name: auricle, label: 'Auricle', type: boolean }
-          - { name: source, label: 'Source', type: boolean }
-          - { name: rainforest-iv, label: 'Rainforest IV', type: boolean }
-          - { name: soundscape-console, label: 'Soundscape Console', type: boolean }
-          - { name: gostinka, label: 'Gostinka — 46 Nekrasovskaya St.', type: boolean }
-          - { name: strelka, label: 'Strelka', type: boolean }
-          - { name: autodeconstruction, label: 'Autodeconstruction (перформанс)', type: boolean }
-          - { name: safety-zone, label: 'Safety Zone (перформанс)', type: boolean }
+          - { name: title, label: Название (RU), type: string }
+          - { name: venue, label: Место (RU), type: string }
+          - {
+              name: text,
+              label: Описание (RU),
+              description: Абзацы разделяй пустой строкой.,
+              type: text,
+            }
+      - name: images
+        label: Фото
+        type: image
+        options:
+          media: education
+          multiple: true
+      - name: youtubeId
+        label: YouTube ID
+        description: 'Код из ссылки youtube.com/watch?v=КОД'
+        type: string
+
+  - name: performances
+    label: Список перформансов
+    type: file
+    path: src/cms/performances.json
+    format: json
+    fields:
+      - name: items
+        label: Перформансы (новые сверху)
+        type: object
+        list: true
+        fields:
+          - { name: date, label: Год, type: string, required: true }
+          - { name: title, label: Название (EN), type: string, required: true }
+          - { name: city, label: Город (EN), type: string }
+          - { name: venue, label: Место (EN), type: string }
+          - name: slug
+            label: Страница проекта (slug)
+            description: 'Адрес проекта из раздела «Проекты и перформансы». Если пусто — используется ссылка ниже.'
+            type: string
+          - { name: url, label: Внешняя ссылка, type: string }
+          - name: ru
+            label: Русская версия
+            type: object
+            fields:
+              - { name: title, label: Название (RU), type: string }
+              - { name: city, label: Город (RU), type: string }
+              - { name: venue, label: Место (RU), type: string }
+
+  - name: about
+    label: Обо мне (короткая биография)
+    type: file
+    path: src/cms/about.json
+    format: json
+    fields:
+      - name: en
+        label: English
+        type: object
+        fields:
+          - name: text
+            label: Текст
+            description: 'Абзацы — через пустую строку. 1-й абзац — «Born in…», 2-й — подзаголовок (выделяется), 3-й и далее — основной текст.'
+            type: text
+      - name: ru
+        label: Русский
+        type: object
+        fields:
+          - name: text
+            label: Текст
+            description: 'Абзацы — через пустую строку. 1-й — «Родился…», 2-й — подзаголовок, 3-й и далее — основной текст.'
+            type: text
+
+  - name: contacts
+    label: Контакты
+    type: file
+    path: src/cms/contacts.json
+    format: json
+    fields:
+      - name: items
+        label: Строки контактов
+        type: object
+        list: true
+        fields:
+          - { name: label_en, label: Подпись (EN), type: string, required: true }
+          - { name: label_ru, label: Подпись (RU), type: string }
+          - {
+              name: text,
+              label: Текст на странице,
+              description: 'Например snwglb@gmail.com',
+              type: string,
+              required: true,
+            }
+          - {
+              name: url,
+              label: Ссылка,
+              description: 'mailto:…, tel:+7… или https://…',
+              type: string,
+              required: true,
+            }

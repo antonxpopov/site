@@ -1,0 +1,18 @@
+{
+  "slug": "2026-02-workshop",
+  "order": 2,
+  "year": "2026",
+  "kind": "Workshop",
+  "title": "From Physical Data to Dynamic Image",
+  "venue": "TSEKH* × Center 800, Nizhny Novgorod",
+  "text": "Hands-on: an ESP32 microcontroller with a light sensor, the MQTT protocol and interactive graphics in TouchDesigner.",
+  "images": [
+    "/images/education/popov_workshop-physical-data_2026_01.jpg",
+    "/images/education/popov_workshop-physical-data_2026_02.jpg"
+  ],
+  "ru": {
+    "title": "От физических данных к динамическому изображению",
+    "venue": "ЦЕХ* × Центр 800, Нижний Новгород",
+    "text": "На практике: связка микроконтроллера ESP32 и датчика освещённости, протокол MQTT и интерактивная графика в TouchDesigner."
+  }
+}

@@ -1,0 +1,58 @@
+---
+// Scroll-driven polish: reveal-on-scroll for page blocks and a reading-progress line.
+---
+
+<div class="scroll-progress" aria-hidden="true" data-progress></div>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1. Reveal. Direct children of the page container, list rows and headings fade in
+  //    and rise a little; blocks entering together are staggered.
+  const targets: Set<HTMLElement> = new Set();
+  document
+    .querySelectorAll<HTMLElement>(
+      'main .container > *:not(ul), main .divide-thin > li, main [data-reveal]'
+    )
+    .forEach((el) => targets.add(el));
+  targets.forEach((el) => el.setAttribute('data-reveal', ''));
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((e) => e.isIntersecting)
+          .forEach((entry, i) => {
+            const el = entry.target as HTMLElement;
+            el.style.setProperty('--reveal-delay', `${Math.min(i, 5) * 70}ms`);
+            el.classList.add('is-visible');
+            io.unobserve(el);
+          });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+    );
+    targets.forEach((el) => io.observe(el));
+  }
+
+  // 2. Reading progress.
+  const bar = document.querySelector<HTMLElement>('[data-progress]');
+  if (bar) {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!frame) frame = requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+</script>

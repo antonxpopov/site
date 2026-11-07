@@ -1,0 +1,40 @@
+{
+  "slug": "safety-zone",
+  "hidden": false,
+  "order": 10,
+  "category": "performance",
+  "year": "2023",
+  "title": "Safety Zone",
+  "en": {
+    "description": "An audiovisual performance about those pushed to the fringes of the city’s consciousness.",
+    "format": "Audiovisual performance",
+    "media": "Video-art, soundscapes, analog photos, slide projector",
+    "credits": "Alina Mazur, Ekaterina Nesterova, Sergey Inozemtsev, Anton Popov",
+    "text": "A safety zone is a space with special conditions that protect people from harmful environmental effects.\n\nThe artists address the memory of people pushed to the fringes of the city’s consciousness, documenting a cemetery with an instant analog camera and a pickup."
+  },
+  "ru": {
+    "title": "Безопасная зона",
+    "description": "Аудиовизуальный перформанс о тех, кого вытеснили на окраины сознания города.",
+    "format": "Аудиовизуальный перформанс",
+    "media": "Видео-арт, саундскейп, аналоговая фотография, диапроектор",
+    "credits": "Алина Мазур, Екатерина Нестерова, Сергей Иноземцев, Антон Попов",
+    "text": "Безопасная зона — пространство с особыми условиями, защищающими человека от вредного воздействия среды.\n\nХудожники обращаются к памяти о людях, вытесненных на окраины сознания города, документируя кладбище аналоговой камерой моментальной печати и звукоснимателем."
+  },
+  "images": [
+    "/images/projects/popov_safety-zone_2023_01.jpg",
+    "/images/projects/popov_safety-zone_2023_02.jpg"
+  ],
+  "vimeoId": "1109861598",
+  "links": [
+    {
+      "url": "https://antonpopov.bandcamp.com/track/safe-area-live",
+      "label": "Bandcamp",
+      "label_ru": "Bandcamp"
+    },
+    {
+      "url": "https://vimeo.com/1079712189",
+      "label": "Vimeo — alternative cut",
+      "label_ru": "Vimeo — альтернативная версия"
+    }
+  ]
+}

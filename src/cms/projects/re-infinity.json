@@ -1,0 +1,26 @@
+{
+  "slug": "re-infinity",
+  "hidden": false,
+  "order": 2,
+  "category": "artwork",
+  "year": "2024",
+  "title": "RE∞",
+  "en": {
+    "description": "A 60-minute ambient cassette built from the artist’s father’s dying family tapes.",
+    "format": "Experimental music, sound collage",
+    "media": "Audio cassette tape [60′00″], edition of 50",
+    "text": "An artistic research project placed in the discursive field of media archaeology, hauntology of sound, and research into the mechanisms of memory and recollection. The material for the research was my father’s family collection of audiocassettes, with recordings of popular music from the end of the last century, contained on slowly dying magnetic tape.\n\nThe appeal to reflective and restorative nostalgia as a central sensual and subjective method, and the use of the principle of random fragmentation of the documented sound recording, resampling and stretching the canvas, help the ghostly evidence of the past to address the present and future moment."
+  },
+  "ru": {
+    "title": "РЕ∞",
+    "description": "Шестидесятиминутная эмбиент-кассета из умирающих семейных плёнок отца художника.",
+    "format": "Экспериментальная электронная музыка, звуковой коллаж",
+    "media": "Компакт-кассета [60′00″], тираж 50 шт.",
+    "text": "Художественно-исследовательский проект, помещённый в дискурсивное поле медиа-археологии, хонтологии звука, исследований механизмов памяти и воспоминаний. Материалом для исследования стала семейная коллекция аудиокассет с записями популярной музыки конца прошлого столетия, которая хранится на медленно умирающей магнитной плёнке.\n\nОбращение к рефлексирующей и реставрирующей ностальгии как центральному чувственному и субъективному методу, использование принципа случайной фрагментарности архивной звукозаписи, ресемплирования и растягивания полотна помогают призрачным свидетельствам прошлого обратиться к настоящему и будущему моменту. Результатом поиска почти забытых звуковых отрывков и закольцовывания магнитной ленты, наслоения и сведения стала аудиокассета длительностью 60 минут, наполненная ностальгической реконструкцией в форме минималистического эмбиент-полотна."
+  },
+  "images": [
+    "/images/projects/popov_re-infinity_2024_01.jpg",
+    "/images/projects/popov_re-infinity_2024_02.jpg",
+    "/images/projects/popov_re-infinity_2024_03.jpg"
+  ]
+}

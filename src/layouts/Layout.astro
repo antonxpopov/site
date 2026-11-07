@@ -2,9 +2,13 @@
 import '@fontsource/source-code-pro/400.css';
 import '@fontsource/source-code-pro/500.css';
 import '@fontsource/source-code-pro/600.css';
+import '@fontsource/geologica/500.css';
+import '@fontsource/geologica/600.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import ScrollTopButton from '../components/ScrollTopButton.astro';
+import ScrollEffects from '../components/ScrollEffects.astro';
+import Footer from '../components/Footer.astro';
 import { getImage } from 'astro:assets';
 import { withBase } from '../utils/paths';
 import { getAsset } from '../utils/images';
@@ -15,9 +19,13 @@ interface Props {
   description?: string;
   overlay?: boolean;
   lang?: Lang;
+  /** Image path as in the data files, e.g. /images/projects/x.jpg. Defaults to the site image. */
+  image?: string;
+  /** Ask search engines not to index the page. */
+  noindex?: boolean;
 }
 
-const { title, description, overlay = false, lang = 'en' } = Astro.props;
+const { title, description, overlay = false, lang = 'en', image, noindex = false } = Astro.props;
 const metaDescription = description ?? ui[lang].siteDescription;
 
 // Language-less path (base stripped) → alternate URLs for the language switcher / hreflang
@@ -35,7 +43,9 @@ const absolute = (p: string) => new URL(p, Astro.site).href;
 // Pages build to directories, and GitHub Pages redirects `/site` → `/site/`
 const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const canonicalUrl = new URL(pathname, Astro.site).href;
-const ogSource = getAsset('/images/projects/popov_re-infinity_2024_01.jpg');
+const ogSource =
+  (image ? getAsset(image) : undefined) ??
+  getAsset('/images/projects/popov_re-infinity_2024_01.jpg');
 const ogImage = ogSource
   ? absolute((await getImage({ src: ogSource, width: 1200, format: 'jpg' })).src)
   : undefined;
@@ -47,6 +57,7 @@ const ogImage = ogSource
     <meta charset="UTF-8" />
     <meta name="description" content={metaDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta
       name="keywords"
       content="sound art, experimental music, installation, field recording, Anton Popov, Vladivostok"
@@ -66,11 +77,17 @@ const ogImage = ogSource
     <link rel="alternate" hreflang="ru" href={absolute(alt.ru)} />
     <link rel="alternate" hreflang="x-default" href={absolute(alt.en)} />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
     <title>{title}</title>
   </head>
   <body>
+    <a href="#main" class="skip-link text-sm font-mono">{ui[lang].skip}</a>
     <Header overlay={overlay} lang={lang} neutralPath={neutralPath} alt={alt} />
     <slot />
+    <Footer lang={lang} />
     <ScrollTopButton lang={lang} />
+    <ScrollEffects />
   </body>
 </html>

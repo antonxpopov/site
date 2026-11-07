@@ -1,0 +1,30 @@
+{
+  "slug": "strelka",
+  "hidden": false,
+  "order": 8,
+  "category": "artwork",
+  "year": "2026",
+  "title": "Strelka",
+  "en": {
+    "description": "The confluence of the Volga and Oka as a hybrid landscape of rivers and data.",
+    "format": "Video-art, sound-art, LED installation",
+    "media": "TouchDesigner",
+    "credits": "With Alexey Balakhnin",
+    "text": "The work explores the confluence of the Volga and Oka rivers as a hybrid landscape in which natural processes cannot be separated from technological ones. Throughout history, Strelka has been a site of circulation for river currents, goods, transportation, and information.\n\nThe installation presents these flows as a unified system in which digital networks become extensions of river currents, and binary code emerges as a new form of natural matter."
+  },
+  "ru": {
+    "title": "Стрелка",
+    "description": "Слияние Волги и Оки как гибридный ландшафт рек и данных.",
+    "format": "Видео-арт, саунд-арт, LED-инсталляция",
+    "media": "TouchDesigner",
+    "credits": "Совместно с Алексеем Балахниным",
+    "text": "Работа исследует место слияния двух рек — Волги и Оки как гибридный ландшафт, в котором природные процессы невозможно отделить от технологических. На протяжении истории Стрелка была пространством циркуляции речных потоков, товаров, транспорта и информации.\n\nИнсталляция демонстрирует эти потоки как единую систему, в которой цифровые сети становятся продолжением речных течений, а бинарный код — новой формой природной материи."
+  },
+  "cover": "/images/projects/popov_strelka_2026_01.jpg",
+  "images": [
+    "/images/projects/popov_strelka_2026_02.jpg",
+    "/images/projects/popov_strelka_2026_01.jpg",
+    "/images/projects/popov_strelka_2026_03.jpg"
+  ],
+  "youtubeId": "D_562utauII"
+}

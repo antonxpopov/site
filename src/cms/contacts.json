@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "label_en": "Email",
+      "label_ru": "Почта",
+      "text": "snwglb@gmail.com",
+      "url": "mailto:snwglb@gmail.com"
+    },
+    {
+      "label_en": "Phone",
+      "label_ru": "Телефон",
+      "text": "+7 950 281-06-85",
+      "url": "tel:+79502810685"
+    },
+    {
+      "label_en": "Bandcamp",
+      "label_ru": "Bandcamp",
+      "text": "antonpopov.bandcamp.com",
+      "url": "https://antonpopov.bandcamp.com"
+    },
+    {
+      "label_en": "Mixcloud",
+      "label_ru": "Mixcloud",
+      "text": "mixcloud.com/snwglb",
+      "url": "https://www.mixcloud.com/snwglb/"
+    }
+  ]
+}

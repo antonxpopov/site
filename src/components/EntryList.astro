@@ -17,15 +17,15 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<ul class="divide-y divide-border font-mono">
+<ul class="divide-thin font-mono">
   {
     entries.map((e) => (
       <li>
         {(() => {
           const inner = (
             <>
-              <span class="text-text-muted text-sm pt-1">{e.year}</span>
-              <span class="block w-[4.5rem] md:w-24 aspect-[3/2] rounded overflow-hidden border border-border">
+              <span class="hidden md:block text-text-muted text-sm pt-1">{e.year}</span>
+              <span class="block w-20 md:w-24 aspect-[3/2] rounded overflow-hidden border border-border">
                 {e.thumb && getAsset(e.thumb) && (
                   <Image
                     src={getAsset(e.thumb)!}
@@ -40,13 +40,14 @@ const { entries } = Astro.props;
                 )}
               </span>
               <span>
+                <span class="md:hidden block text-text-muted text-sm">{e.year}</span>
                 <span class="block text-text">{e.title}</span>
                 {e.meta && <span class="block text-text-muted text-sm">{e.meta}</span>}
               </span>
             </>
           );
           const cls =
-            'py-4 grid grid-cols-[3rem_4.5rem_1fr] md:grid-cols-[5rem_6rem_1fr] gap-x-4 items-start';
+            'py-4 grid grid-cols-[5rem_1fr] md:grid-cols-[5rem_6rem_1fr] gap-x-4 items-start';
           return e.href ? (
             <a href={e.href} class={`${cls} hover:bg-bg-secondary/60 transition-colors`}>
               {inner}

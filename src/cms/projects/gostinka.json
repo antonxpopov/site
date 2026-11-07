@@ -1,0 +1,41 @@
+{
+  "slug": "gostinka",
+  "hidden": false,
+  "order": 7,
+  "category": "artwork",
+  "year": "2022",
+  "title": "Gostinka — 46 Nekrasovskaya St.",
+  "en": {
+    "description": "Psychogeographic documentation of an unusual apartment building in Vladivostok.",
+    "format": "Zine, soundscape",
+    "media": "Zine, 58 pages, A4 (21×29.7 cm), edition of 2 copies. Digital audio recording [06′42″]",
+    "credits": "Gleb Akulich, Liza Ilchenko, Sofya Varlamova, Anton Popov (art group KhIP)",
+    "text": "Collective artistic research practice based on the psychogeographical discourse — the Theory of Drift — by the French philosopher Guy Debord.\n\nDocumentation of the psychogeographical process of an unusual apartment building in Vladivostok."
+  },
+  "ru": {
+    "title": "Гостинка. Некрасовская 46",
+    "description": "Психогеографическая документация необычного многоквартирного дома во Владивостоке.",
+    "format": "Зин, саундскейп",
+    "media": "58 страниц, A4 | 21×29,7 см. Тираж — 2 копии. Цифровая аудиозапись [06′42″]",
+    "credits": "Глеб Акулич, Лиза Ильченко, Софья Варламова, Антон Попов (арт-группа «ХИП»)",
+    "text": "Коллективная художественно-исследовательская практика по психогеографическому дискурсу — теории дрейфа — Ги Дебора.\n\nЗвуковая документация пространства необычного многоквартирного жилого дома во Владивостоке.\n\n«Звук. Вечный и всеобщий шорох. Топающих ног за дверью. Щелчок зажигалки. Хлопок дверью. Крик истошный. Плевок. Падающий пакет по мусоропроводу. Сквозняк. Поднятие лифта. Свист сквозняка. Слышно, как люди моются»"
+  },
+  "images": [
+    "/images/projects/popov_gostinka_2022_01.jpg"
+  ],
+  "calameoId": "007258745c2fc24223d53",
+  "links": [
+    {
+      "url": "https://www.mixcloud.com/snwglb/nekrasovskaya-46/",
+      "label": "Mixcloud"
+    },
+    {
+      "url": "https://antonpopov.bandcamp.com/nekrasovskaya-46",
+      "label": "Bandcamp"
+    },
+    {
+      "url": "https://syg.ma/niekrasovskaia-46",
+      "label": "syg.ma"
+    }
+  ]
+}

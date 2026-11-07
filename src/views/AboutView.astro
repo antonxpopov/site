@@ -15,8 +15,8 @@ const t = ui[lang];
 ---
 
 <Layout title={t.titles.about} description={bio[lang][1]} lang={lang}>
-  <main class="min-h-screen bg-bg pt-12 pb-24 font-mono">
-    <div class="container mx-auto px-6 md:px-8 max-w-container">
+  <main id="main" class="min-h-screen bg-bg pt-12 pb-24 font-mono">
+    <div class="container mx-auto px-5 md:px-8 max-w-container">
       <h1 class="text-2xl md:text-3xl font-semibold text-text mb-8">{t.nav.about}</h1>
 
       <AboutIntro lang={lang} />
@@ -28,14 +28,14 @@ const t = ui[lang];
             <h3 class="text-sm uppercase tracking-wider text-text-muted mb-3">
               {lang === 'ru' ? section.ruTitle : section.title}
             </h3>
-            <ul class="divide-y divide-border border-t border-b border-border">
+            <ul class="divide-thin hairline-t hairline-b border-border">
               {section.items.map((item) => (
                 <li class="py-2 grid grid-cols-[3rem_1fr] md:grid-cols-[5rem_1fr] gap-x-4 text-sm">
                   <span class="text-text-muted">{item.year}</span>
                   {item.href ? (
                     <a
                       href={withBase(localePath(lang, item.href))}
-                      class="text-text underline underline-offset-4 hover:text-text-muted"
+                      class="tap text-text underline underline-offset-4 hover:text-text-muted"
                     >
                       {typo(lang === 'ru' ? item.ru : item.text, lang)}
                     </a>

@@ -40,11 +40,12 @@ export function cmsToProject(entry: CmsProject): Project {
     category: entry.category ?? 'artwork',
     year: clean(entry.year),
     ...textFields(entry.en),
-    imageUrl: images[0],
+    imageUrl: clean(entry.cover) ?? images[0],
     images: images.length ? images : undefined,
     vimeoId: clean(entry.vimeoId),
     youtubeId: clean(entry.youtubeId),
     audioUrl: clean(entry.audioUrl),
+    calameoId: clean(entry.calameoId),
     links: entry.links
       ?.filter((link) => clean(link.url))
       .map((link) => ({ url: link.url.trim(), label: clean(link.label) ?? link.url.trim() })),

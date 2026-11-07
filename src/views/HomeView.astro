@@ -6,8 +6,10 @@ import ProjectsList from '../components/ProjectsList.astro';
 import EntryList from '../components/EntryList.astro';
 import ContactsList from '../components/ContactsList.astro';
 import { lectures } from '../data/lectures';
+import { performances } from '../data/performances';
+import { getProject } from '../data/projects';
 import { ui, localePath } from '../i18n/ui';
-import { localizeLecture } from '../i18n/localize';
+import { localizeLecture, localizePerformance } from '../i18n/localize';
 import { withBase } from '../utils/paths';
 import type { Lang } from '../types';
 
@@ -19,9 +21,23 @@ const t = ui[lang];
 
 const sections = [
   { id: 'projects', label: t.nav.projects, href: '/projects' },
+  { id: 'performances', label: t.nav.performances, href: '/performances' },
   { id: 'teaching', label: t.nav.teaching, href: '/teaching' },
   { id: 'contacts', label: t.nav.contacts, href: '/contacts' },
 ] as const;
+
+const performanceEntries = performances.map((item) => {
+  const text = localizePerformance(item, lang);
+  const project = item.slug ? getProject(item.slug) : undefined;
+  const section = project?.category === 'performance' ? 'performances' : 'projects';
+  return {
+    year: item.date,
+    title: text.title,
+    meta: [text.city, text.venue].filter(Boolean).join(' · ') || undefined,
+    href: project ? withBase(localePath(lang, `/${section}/${project.slug}`)) : item.url,
+    thumb: project?.imageUrl,
+  };
+});
 
 // Short version of the teaching page: each row links to its full entry there.
 const teachingEntries = lectures.map((item, i) => {
@@ -37,21 +53,25 @@ const teachingEntries = lectures.map((item, i) => {
 ---
 
 <Layout title={t.titles.home} lang={lang} overlay>
-  <main class="bg-bg font-mono">
-    <div class="min-h-[calc(100svh-72px)] flex items-start pt-[14svh] pb-24 relative">
+  <main id="main" class="bg-bg font-mono">
+    <div
+      class="md:min-h-[calc(80svh-72px)] flex items-start pt-[12svh] md:pt-[14svh] pb-12 md:pb-24 relative"
+    >
       <HeroSlider />
       <div
-        class="relative container mx-auto px-6 md:px-8 max-w-container [text-shadow:0_1px_16px_rgb(0_0_0/0.6)]"
+        class="relative container mx-auto px-5 md:px-8 max-w-container [text-shadow:0_1px_16px_rgb(0_0_0/0.6)]"
       >
-        <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-text">{t.name}</h1>
-        <div class="mt-8 [&_.text-text-muted]:text-text">
-          <AboutIntro lang={lang} from={1} />
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-text">
+          {t.name}
+        </h1>
+        <div class="mt-5 md:mt-8 [&_.text-text-muted]:text-text">
+          <AboutIntro lang={lang} from={1} count={1} showCv={false} />
         </div>
       </div>
       <a
         href="#projects"
         aria-label={t.scrollDown}
-        class="absolute z-10 bottom-8 left-1/2 -translate-x-1/2 p-2 text-text-muted hover:text-text"
+        class="hidden md:block absolute z-10 bottom-8 left-1/2 -translate-x-1/2 p-2 text-text-muted hover:text-text"
       >
         <svg
           class="w-6 h-6"
@@ -70,14 +90,15 @@ const teachingEntries = lectures.map((item, i) => {
 
     {
       sections.map((s) => (
-        <section id={s.id} class="border-t border-border py-16 md:py-24">
-          <div class="container mx-auto px-6 md:px-8 max-w-container">
+        <section id={s.id} class="hairline-t border-border py-10 md:py-24">
+          <div class="container mx-auto px-5 md:px-8 max-w-container">
             <h2 class="text-2xl md:text-3xl font-semibold text-text mb-8">
-              <a href={withBase(localePath(lang, s.href))} class="hover:text-text-muted">
+              <a href={withBase(localePath(lang, s.href))} class="tap hover:text-text-muted">
                 {s.label}
               </a>
             </h2>
             {s.id === 'projects' && <ProjectsList lang={lang} />}
+            {s.id === 'performances' && <EntryList entries={performanceEntries} />}
             {s.id === 'teaching' && <EntryList entries={teachingEntries} />}
             {s.id === 'contacts' && <ContactsList lang={lang} />}
           </div>

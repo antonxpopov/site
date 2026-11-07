@@ -77,15 +77,20 @@ export interface CmsProjectText {
 export interface CmsProject {
   slug: string;
   hidden?: boolean;
+  /** Position in lists among projects of the same year (1 = first) */
+  order?: number;
   category?: 'artwork' | 'performance';
   year?: string;
   title: string;
   en?: CmsProjectText;
   ru?: CmsProjectText;
+  /** List cover, when it differs from the first photo */
+  cover?: string;
   images?: string[];
   vimeoId?: string;
   youtubeId?: string;
   audioUrl?: string;
+  calameoId?: string;
   links?: { url: string; label?: string; label_ru?: string }[];
 }
 

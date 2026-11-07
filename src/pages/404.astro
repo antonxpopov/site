@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { withBase } from '../utils/paths';
+---
+
+<Layout title="Page not found — Anton Popov" lang="en">
+  <main id="main" class="min-h-[60vh] bg-bg pt-12 pb-24 font-mono">
+    <div class="container mx-auto px-5 md:px-8 max-w-container">
+      <p class="text-sm text-text-muted">404</p>
+      <h1 class="mt-2 text-2xl md:text-3xl font-semibold text-text">Page not found</h1>
+      <p class="mt-4 text-body text-text-muted">
+        <a href={withBase('/')} class="text-text underline underline-offset-4 tap">Home</a>
+        ·
+        <a href={withBase('/projects')} class="text-text underline underline-offset-4 tap"
+          >Projects</a
+        >
+      </p>
+      <p class="mt-8 text-body text-text-muted">Страница не найдена</p>
+      <p class="mt-2 text-body text-text-muted">
+        <a href={withBase('/ru')} class="text-text underline underline-offset-4 tap">На главную</a>
+        ·
+        <a href={withBase('/ru/projects')} class="text-text underline underline-offset-4 tap"
+          >Проекты</a
+        >
+      </p>
+    </div>
+  </main>
+</Layout>

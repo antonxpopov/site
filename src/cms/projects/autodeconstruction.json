@@ -1,0 +1,30 @@
+{
+  "slug": "autodeconstruction",
+  "hidden": false,
+  "order": 9,
+  "category": "performance",
+  "year": "2025",
+  "title": "Autodeconstruction",
+  "en": {
+    "description": "Deconstructive Tape Live in a Vladivostok auto salvage yard.",
+    "format": "Improvised audio live performance",
+    "media": "Retro car radio, audio tapes",
+    "venue": "GBRparts auto salvage yard, Vladivostok",
+    "text": "An improvised audio performance at a Vladivostok auto salvage yard: a car radio and a family archive of cassettes become instruments of sound archaeology. Fragments of music on tape and “voices of a Japanese interface” pass through noise, looping and feedback.\n\nDeconstructive Tape Live works within a poetics of entropy: instead of fidelity, it foregrounds the noise of collapse, signal residue and the material fatigue of media."
+  },
+  "ru": {
+    "title": "Автодеконструкция",
+    "description": "Deconstructive Tape Live на авторазборке во Владивостоке.",
+    "format": "Импровизационный звуковой лайв-перформанс",
+    "media": "Ретро автомагнитолы, компакт-кассеты",
+    "venue": "Авторазборка GBRparts, Владивосток",
+    "text": "Импровизационный аудиоперформанс на авторазборке во Владивостоке: автомагнитола и семейный архив кассет становятся инструментами звуковой археологии.\n\nОтрывки музыки на плёнке и «голоса японского интерфейса» проходят через шум, закольцовывание и обратную связь. Авторазборка становится резонирующим пространством памяти, где семейный архив и объекты индустриальной эпохи сливаются в один акустический процесс."
+  },
+  "images": [
+    "/images/projects/popov_autodeconstruction_2025_01.jpg",
+    "/images/projects/popov_autodeconstruction_2025_02.jpg",
+    "/images/projects/popov_autodeconstruction_2025_03.jpg",
+    "/images/projects/popov_autodeconstruction_2025_04.jpg"
+  ],
+  "vimeoId": "1117938842"
+}

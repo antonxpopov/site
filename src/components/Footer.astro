@@ -1,0 +1,22 @@
+---
+import { withBase } from '../utils/paths';
+import { ui, localePath } from '../i18n/ui';
+import type { Lang } from '../types';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<footer class="hairline-t border-border bg-bg font-mono text-sm text-text-muted">
+  <div
+    class="container mx-auto px-5 md:px-8 max-w-container py-8 flex items-center justify-between gap-6"
+  >
+    <a href={withBase(localePath(lang, '/'))} class="tap text-text hover:text-text-muted">
+      {t.name}
+    </a>
+    <span>© {new Date().getFullYear()}</span>
+  </div>
+</footer>

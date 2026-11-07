@@ -1,0 +1,25 @@
+{
+  "slug": "source",
+  "hidden": false,
+  "order": 4,
+  "category": "artwork",
+  "year": "2022",
+  "title": "Source",
+  "en": {
+    "description": "Wind, water, tree, stone, sea wave, bird, man and his machine.",
+    "format": "Video-art, soundscape",
+    "media": "Video [03′42″]",
+    "text": "A study of the acoustic process of the urban and natural landscape. Through the method of opposing and breaking the connection between the visual and the auditory, the possibility of hearing the soundscape of the environment in which we live every day is presented."
+  },
+  "ru": {
+    "title": "Источник",
+    "description": "Ветер, дерево, камень, морская волна, птица, человек и его машина.",
+    "format": "Видео-арт, саундскейп",
+    "media": "Видео [03′42″]",
+    "text": "Исследование акустического процесса урбанистического и природного ландшафта. Методом противопоставления и нарушения связи визуального и звукового слоя представлена возможность услышать звуковой ландшафт той среды, в которой мы ежедневно пребываем."
+  },
+  "images": [
+    "/images/projects/popov_source_2022_01.jpg"
+  ],
+  "vimeoId": "936938275"
+}
