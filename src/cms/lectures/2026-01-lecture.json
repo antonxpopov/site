@@ -1,17 +1,17 @@
 {
   "slug": "2026-01-lecture",
-  "order": 1,
   "year": "2026",
+  "order": 1,
   "kind": "Lecture",
-  "title": "From Raw Data to Sound Environment: How Field Recordings, Maps, and Archives Become an Art Project",
+  "title": "From Raw Data to Sound Environment",
   "venue": "TSEKH* × Center 800, Nizhny Novgorod",
-  "text": "How do observation, data collection and work with sources become an art project? The focus is on soundscape and field recording, seen through the anthropology of everyday life, cartography, collective memory and “second nature”.\n\nThe whole path of working with material: from recording to cleaning and analysis.",
-  "images": [
-    "/images/education/popov_raw-data-lecture_2026_01.jpg"
-  ],
+  "text": "How do observation, data collection and work with sources become an art project? The focus is on soundscape and field recording, seen through the anthropology of everyday life, cartography, collective memory and “second nature”.",
   "ru": {
-    "title": "От сырых данных к звуковой среде: как полевые записи, карты и архивы становятся художественным проектом",
+    "title": "От сырых данных к звуковой среде",
     "venue": "ЦЕХ* × Центр 800, Нижний Новгород",
     "text": "Как наблюдение, сбор данных и работа с источниками превращаются в художественный проект? В фокусе — саундскейп и field recording, а также оптики антропологии повседневности, картографии, коллективной памяти и «второй природы».\n\nВесь путь работы с материалом: от записи на рекордер до очистки и анализа."
-  }
+  },
+  "images": [
+    "/images/education/popov_raw-data-lecture_2026_01.jpg"
+  ]
 }
